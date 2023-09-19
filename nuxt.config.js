@@ -199,7 +199,7 @@ export default {
    generate: {
       crawler: false,
       cache: false,
-      fallback: '404.html',
+      fallback: true,
       async routes() {
          const pages = await request(
             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`,
