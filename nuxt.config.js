@@ -1,5 +1,7 @@
 import { gql, request } from 'nuxt-graphql-request'
 import allGeneralPagesQuery from './graphql/allGeneralPages'
+import allBlogPostsQuery from './graphql/allBlogPosts'
+
 export default {
    // Target: https://go.nuxtjs.dev/config-target
    target: 'static',
@@ -199,9 +201,9 @@ export default {
    generate: {
       crawler: false,
       cache: false,
-      fallback: true,
+      fallback: '404.html',
       async routes() {
-         const pages = await request(
+         const generalPages = await request(
             `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`,
             allGeneralPagesQuery,
             null,
@@ -209,18 +211,34 @@ export default {
                authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
             }
          )
+         const blogPosts = await request(
+            `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE}/environments/${process.env.CONTENTFUL_ENVIRONMENT}`,
+            allBlogPostsQuery,
+            null,
+            {
+               authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+            }
+         )
 
-         return pages.generalPagesCollection.items.map(page => {
-            return {
+         const routes = []
+
+         // Create routes for general pages
+         generalPages.generalPagesCollection.items.forEach(page => {
+            routes.push({
                route: page.slug === '/' ? '/' : `/${page.slug}`,
                // payload: page,
-            }
+            })
          })
-         //   return axios.get('https://my-api/users').then(res => {
-         //     return res.data.map(user => {
-         //       return '/users/' + user.id
-         //     })
-         //   })
+
+         // Create routes for blog posts
+         blogPosts.blogPostCollection.items.forEach(post => {
+            routes.push({
+               route: `/blog/${post.slug}`,
+               // payload: post,
+            })
+         })
+
+         return routes
       },
    },
    // googleAnalytics: {
