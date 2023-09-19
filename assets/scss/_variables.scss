@@ -1,0 +1,136 @@
+@use 'sass:math';
+// ---------------------------------------------
+// Fonts
+// ---------------------------------------------
+
+$mont: 'Mont', sans-serif;
+$rhetorik: 'Rhetorik', sans-serif;
+$poppins: 'Poppins', sans-serif;
+
+$base-size: 20; // Default
+$base-FS: $base-size * 1px;
+
+@function rem($pixels, $context: $base-size) {
+   @return math.div($pixels, $context) * 1rem;
+}
+@function em($pixels, $context: $base-size) {
+   @return math.div($pixels, $context) * 1em;
+}
+
+// p
+$p-FS: rem(20);
+$p-LH: 1.5;
+$p-LS: -0.02em;
+
+$p-s-FS: rem(16);
+$p-s-LH: 1.54;
+$p-s-LS: -0.01em;
+
+$p-xs-FS: rem(14);
+$p-xs-LH: 1.4;
+$p-xs-LS: -0.01em;
+
+// h
+$h1-FS: rem(56);
+$h1-LH: 1;
+$h1-LS: -0.04em;
+
+$h2-FS: rem(48);
+$h2-LH: 1.1;
+$h2-LS: -0.03em;
+
+$h3-FS: rem(40);
+$h3-LH: 1.08;
+$h3-LS: -0.03em;
+
+$h4-FS: rem(30);
+$h4-LH: 1.2;
+$h4-LS: -0.03em;
+
+$h5-FS: rem(24);
+$h5-LH: 1.3;
+$h5-LS: -0.03em;
+
+// Label
+$h6-FS: rem(14);
+$h6-LH: 1.1;
+$h6-LS: 0.08em;
+
+// Buttons / Links
+$btn-FS: rem(16);
+$btn-LH: 1.62;
+$btn-LS: -0.02em;
+
+// ---------------------------------------------
+// Colors
+// ---------------------------------------------
+
+$white      : #ffffff;
+$off-white  : #f8fafb;
+$white-mint : #f2f9f1;
+$grey-lt    : #dbdbdb;
+$grey       : #8f999e;
+$grey-dk    : #525B60; 
+$navy-dk    : #07202d;
+$navy       : #003049;
+$copy       : $navy-dk;
+$card-shadow: #171F34;
+
+$blue-lt    : #cbe6f8;
+$mint       : #00d2b2;
+$mint-lt    : #beffcb;
+
+$teal-dk    : #019e86;
+$teal-lt    : #9ce8d4;
+
+$orange-dk  : #bb4a29;
+$orange     : #ec7a58;
+
+// ---------------------------------------------
+// Vertical Rythym
+// ---------------------------------------------
+
+$pad-giant  : 120px;
+$pad-big    : 88px;
+$pad-xxlarge: 64px;
+$pad-xlarge : 56px;
+$pad-large  : 48px;
+$pad-medium : 40px;
+$pad-small  : 32px;
+$pad-xsmall : 24px;
+$pad-xxsmall: 16px;
+$pad-tiny   : 8px;
+
+$spacer: $gutter;
+
+// ---------------------------------------------
+// Radius
+// ---------------------------------------------
+
+$btn-rad: 40px;
+$card-rad: 8px;
+$media-rad: 16px;
+$block-rad: 40px;
+
+$mobile-block-rad: 24px;
+
+// ---------------------------------------------
+// Animations
+// ---------------------------------------------
+
+// $outQuad 	               : cubic-bezier(0.165, 0.840, 0.190, 0.950);
+// $easeInQuad                : cubic-bezier(0.895, 0.03, 0.685, 0.22);
+// $easeOutQuad               : cubic-bezier(0.165, 0.84, 0.44, 1);
+$outCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+$index: (
+   'under': -1,
+   'base': 0,
+   'one': 1,
+   'normal': 3,
+   'card': 5,
+   'mm': 38,
+   'header': 40,
+   'modal': 45,
+   'gdpr': 50,
+);

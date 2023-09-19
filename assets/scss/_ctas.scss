@@ -1,0 +1,265 @@
+// BUTTON
+button.cta,
+.btn {
+   display: block;
+   background: none;
+   margin: 0;
+   padding: 0;
+   border: 1px solid $navy-dk;
+   border-radius: $btn-rad;
+   cursor: pointer;
+   a,
+   span {
+      display: block;
+      padding: $pad-xxsmall $pad-xsmall;
+      color: $navy-dk;
+   }
+   // arrow
+   &.w-arrow {
+      transition: transform 0.25s $outCubic;
+      transform-origin: left center;
+      a,
+      span {
+         @include flex(flex, row, center, space-between);
+         position: relative;
+         .cta-arrow-tip {
+            height: 12px;
+            margin: 0 0 0 calc($pad-tiny + 18px);
+            transition: margin 0.25s $outCubic;
+            transform-origin: left center;
+         }
+         &::before { // arrow line
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: calc($pad-xsmall + 2px);
+            transform: translateY(-50%);
+            width: 18px;
+            height: 2px;
+            border-radius: $btn-rad;
+            background: $navy-dk;
+            transition: width 0.25s $outCubic;
+            transform-origin: left center;
+         }
+      }
+      &:hover {
+         // transform: translateX(6px);
+         a,
+         span {
+            .cta-arrow-tip {
+               margin: 0 0 0 calc($pad-tiny + 28px);
+            }
+            &::before {
+               width: 28px;
+            }
+         }
+      }
+   }
+   // primary
+   &.style-primary {
+      position: relative;
+      background: $white-mint;
+      border: none;
+      box-shadow: 0px 0px 0px 1px $navy-dk inset;
+      a,
+      span {
+         background: $white;
+         border: 1px solid $navy-dk;
+         border-radius: $btn-rad;
+         transition: transform 0.25s $outCubic;
+      }
+      &:hover {
+         a,
+         span {
+            transform: translate(6px, -6px);
+         }
+      }
+   }
+   // secondary
+   &.style-secondary {
+      transition: background-color 0.25s $outCubic;
+      &:hover {
+         background: $white;
+      }
+   }
+   // mini
+   &.mini {
+      background: $white-mint;
+      border: 1px solid $navy-dk;
+      border-radius: $btn-rad;
+      box-shadow: none;
+      transition: background-color 0.25s $outCubic;
+      a,
+      span {
+         display: block;
+         padding: $pad-tiny $pad-xlarge;
+         background: none;
+         border: none;
+      }
+      &:hover {
+         background: $mint-lt;
+         a,
+         span {
+            transform: none;
+         }
+      }
+      &.w-arrow {
+         a,
+         span {
+            .cta-arrow-tip {
+               display: none;
+            }
+            &::before {
+               display: none;
+            }
+         }
+      }
+   }
+   // disabled
+   &.disabled {
+      &.style-primary {
+         background: $white;
+      }
+      &.mini {
+         background: $white-mint;
+      }
+      opacity: 40%;
+      border: 1px solid $navy-dk;
+      border-radius: $btn-rad;
+      box-shadow: none;
+      pointer-events: none;
+      a,
+      span {
+         background: none;
+         border: none;
+      }
+   }
+
+   // DARK
+   &.dark {
+      &.style-secondary {
+         border-color: $white-mint;
+         a,
+         span {
+            color: $white-mint;
+            .cta-arrow-tip {
+               path {
+                  stroke: $white-mint;
+               }
+            }
+            &::before {
+               background: $white-mint;
+            }
+         }
+         &:hover {
+            border-color: $mint-lt;
+            background: $mint-lt;
+            a,
+            span {
+               color: $navy-dk;
+               .cta-arrow-tip {
+                  path {
+                     stroke: $navy-dk;
+                  }
+               }
+               &::before {
+                  background: $navy-dk;
+               }
+            }
+         }
+      }
+   }
+
+   @media #{$tablet-portrait}, #{$phone} {
+      a,
+      span {
+         padding: 12px $pad-xsmall;
+      }
+      &.style-primary {
+         &:hover {
+            a,
+            span {
+               transform: translate(4px, -4px);
+            }
+         }
+      }
+   }
+}
+
+// TEXT LINKS
+.text-link {
+   width: max-content;
+   a,
+   span {
+      @include flex(flex, row, center, space-between);
+      position: relative;
+      color: $navy-dk;
+      transition: all 0.25s $outCubic;
+      .cta-arrow-tip {
+         height: 12px;
+         margin: 0 0 0 calc($pad-tiny + 18px);
+         transition: margin 0.25s $outCubic;
+         vertical-align: middle;
+      }
+      &::before { // arrow line
+         content: '';
+         position: absolute;
+         top: 50%;
+         right: 2px;
+         transform: translateY(calc(-50%));
+         width: 18px;
+         height: 2px;
+         border-radius: $btn-rad;
+         background: $navy-dk;
+         transition: width 0.25s $outCubic;
+      }
+   }
+   &:hover {
+      a,
+      span {
+         color: $teal-dk;
+         .cta-arrow-tip {
+            path {
+               stroke: $teal-dk;
+            }
+            margin: 0 0 0 calc($pad-tiny + 28px);
+         }
+         &::before {
+            width: 28px;
+            background: $teal-dk;
+         }
+      }
+   }
+   &.disabled {
+      pointer-events: none;
+      opacity: 0.4;
+   }
+   &.dark {
+      a,
+      span {
+         color: $white-mint;
+         .cta-arrow-tip {
+            path {
+               stroke: $white-mint;
+            }
+         }
+         &::before {
+            background: $white-mint;
+         }
+      }
+      &:hover {
+         a,
+         span {
+            color: $mint-lt;
+            .cta-arrow-tip {
+               path {
+                  stroke: $mint-lt;
+               }
+            }
+            &::before {
+               background: $mint-lt;
+            }
+         }
+      }
+   }
+}

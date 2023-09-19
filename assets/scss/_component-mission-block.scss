@@ -1,0 +1,46 @@
+section.mission-block{
+   padding: $pad-big 0;
+   @include pl-pr(1,1,1);
+   position: relative;
+   p{
+      @extend .h3,.serif;
+      line-height: 1.5;
+      font-weight: 400;
+      strong,b{
+         padding:4px $pad-xxsmall;
+         font-weight: 400;
+         position: relative;
+         z-index: 1;
+         // background-color: $mint-lt;
+         border-radius: 100px;
+         inline-size: min-content;
+         box-decoration-break: clone;
+         box-shadow: -.05rem -.05rem 0px fade-out($mint, .4),
+         -.05rem -.05rem 0px fade-out($mint, .4),
+         .05rem .05rem 0px fade-out($mint, .4),
+         -.05rem .05rem 0px fade-out($mint, .4),
+         inset 1rem 4rem 0 fade-out($mint, .4);
+
+         // white-space: nowrap;
+         // &:before{
+         //    content: '';
+         //    position: absolute;
+         //    inset: 0;
+         //    background-color: $mint-lt;
+         //    border-radius: 100px;
+         //    z-index: -1;
+         // }
+      }
+   }
+   .actions{
+      margin: $pad-large auto $pad-small;
+      @include flex(flex, row, flex-start, flex-start);
+      >div.cta{
+         margin-right:$pad-medium;
+         white-space: nowrap;
+      }
+   }
+   @media #{$phone}{
+      @include pl-pr(0,0,1);
+   }
+}

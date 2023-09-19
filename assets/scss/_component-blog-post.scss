@@ -1,0 +1,162 @@
+.blog-post {
+   padding: $pad-giant 0;
+   position: relative;
+   color: $navy;
+   @include pl-pr(0, 0, 1);
+
+   .article-detail {
+      padding: 60px 0;
+      border-bottom: 1px solid #d3d1d1;
+      .title {
+         max-width: 824px;
+         color: $navy;
+         text-align: center;
+         font-family: $mont;
+         font-size: 48px;
+         font-weight: 900;
+      }
+      .author {
+         color: $navy;
+         font-family: $poppins;
+         font-size: 22px;
+         font-weight: 600;
+         line-height: 166%;
+         text-align: center;
+         margin-bottom: 0;
+      }
+      .date {
+         color: $navy;
+         font-family: $poppins;
+         font-size: 12px;
+         font-weight: 400;
+         line-height: 26px;
+         letter-spacing: 0.1px;
+         text-align: center;
+      }
+      .article-img {
+         position: relative;
+         width: calc(100% - 20px);
+         height: 463px;
+         @media #{$mobile} {
+            width: calc(100% - 10px);
+            height: 200px;
+         }
+         & img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #000;
+            @media #{$mobile} {
+               border-radius: 5px;
+               border: 1px solid #000;
+            }
+         }
+         &:before,
+         &:after {
+            content: "";
+            border-radius: 10px;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            transition: transform 350ms $outCubic;
+            border: 2px solid #000;
+            opacity: 1;
+            @media #{$mobile} {
+               border-radius: 5px;
+               border: 1px solid #000;
+            }
+         }
+         &::before {
+            left: 8px;
+            top: 8px;
+            background: white;
+            z-index: -1;
+            @media #{$mobile} {
+               left: 4px;
+               top: 4px;
+            }
+         }
+         &::after {
+            left: 20px;
+            top: 20px;
+            background: #f0f4f5;
+            z-index: -2;
+            @media #{$mobile} {
+               left: 10px;
+               top: 10px;
+            }
+         }
+      }
+   }
+
+   .article-middle {
+      margin: 44px 0 98px;
+      @include flex(flex, row, center, space-between);
+      @media #{$mobile} {
+         flex-direction: column-reverse;
+         align-items: normal;
+      }
+      .social-share {
+         @include flex(flex, row, center, normal);
+         @media #{$mobile} {
+            margin-left: auto;
+            margin-bottom: 30px;
+         }
+         .sharing-label {
+            margin: 0 8px 0 0;
+            color: $navy;
+            font-family: $poppins;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 26px;
+            letter-spacing: 0.1px;
+         }
+         .social-icons {
+            @include flex(flex, row, center, normal);
+            .social-icon {
+               @include flex(flex, row, center, center);
+               margin: 0 4px;
+               width: 40px;
+               height: 40px;
+               border-radius: 42.503px;
+               border: 0.759px solid var(--blues-dark-navy-marine, #07202d);
+               background: #fff;
+               & a {
+                  display: inline-flex;
+               }
+            }
+         }
+      }
+   }
+}
+
+.article-cta {
+   flex-direction: column !important;
+   padding-left: 0 !important;
+   padding-right: 0 !important;
+
+   & h3 {
+      color: var(--blues-dark-navy-marine, #07202d);
+      text-align: center;
+      font-family: $mont;
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 108%; /* 43.2px */
+      letter-spacing: -1.2px;
+      @media #{$mobile} {
+         font-size: 30px;
+         font-weight: 700;
+         line-height: 40px;
+      }
+   }
+   & .subtext {
+      color: var(--blues-dark-navy-marine, #07202d);
+      text-align: center;
+      font-family: $poppins;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 153%; /* 30.6px */
+      letter-spacing: -0.4px;
+   }
+}

@@ -1,0 +1,54 @@
+div.marquee-card{
+   @extend .global-card;
+   @include flex(flex, row, center, flex-start);
+   padding: $pad-tiny;
+   display: inline-flex;
+   transition: box-shadow 0.25s $outCubic;
+   &:hover {
+      @extend .global-card-shadow;
+   }
+   &.round-corners{
+      border-radius: $block-rad $block-rad 0 0 ;
+      overflow: hidden;
+      z-index: 5;
+      backface-visibility: hidden
+   }
+   &.large{
+      @include flex(flex, column, flex-start, space-between);
+      display: inline-flex;
+      width: 250px;
+      max-height: 275px;
+      .media-wrapper{
+         // margin-bottom: 8vw;
+         height: 4vw;
+         // width: 65px;
+         width: auto;
+      }
+      h5{
+         margin:  $pad-tiny  ;
+         text-align: left;
+      }
+
+   }
+   h5{
+      margin: 0px $pad-xsmall 0px $pad-xxsmall;
+   }
+   .media-wrapper{
+      height: 100px;
+      width: 100px;
+      img{
+         @extend .global-img, .img-contain;
+      }
+   }
+   
+
+   @media #{$phone}{
+      &.large{
+         
+         .media-wrapper{
+            height: 32px;
+         }
+   
+      }
+   }
+}

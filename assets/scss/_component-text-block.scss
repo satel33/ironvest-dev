@@ -1,0 +1,144 @@
+section.text-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   position: relative;
+   @include flex(flex, column, center, center);
+   padding: $pad-big 0;
+   background: $off-white;
+   z-index: 2;
+   &:only-child{
+      padding-top: calc($pad-big * 2);
+      .text{
+         text-align: left;
+         > * {
+            text-align: left;
+            margin-left: 0;
+         }
+         p a{
+            color: $teal-dk;
+            text-decoration: underline;
+         }
+         ul,ol{
+            padding-left: $pad-xsmall;
+            li{
+               p{
+                  @extend .p-s;
+               }
+            }
+         }
+         ul li{
+            list-style: disc
+         }
+         ol li{
+            list-style: decimal
+         }
+         table{
+            @include ml(-2,-2);
+            @include width( 12,11)
+         }
+      }
+   }
+   .text {
+      @include width(8,7);
+      margin: 0;
+      > * {
+         margin: 0 0 $pad-xsmall;
+         text-align: center;
+      }
+      > h3 {
+         @extend .sans-serif;
+      }
+      > p,
+      > ul {
+         @extend .p-s;
+         @include width(6,5);
+         margin-left: auto;
+         margin-right: auto;
+      }
+      :last-child {
+         margin-bottom: 0;
+      }
+      table{
+         border-spacing: 0px;
+         border-collapse: collapse;
+         tr,td,p{
+            @extend .p-s;
+         }
+         tr td, tr th{
+            border: 1px solid $grey;
+            padding: $pad-xxsmall;
+            vertical-align: text-top;
+         }
+         tr th{
+            background-color: $grey-lt;
+         }
+      }
+   }
+   .card-wrapper {
+      margin: $pad-large 0 0;
+      @include flex(flex, column, stretch, stretch);
+      gap: $pad-xsmall;
+      .text-card {
+         @include width(10,9);
+      }
+   }
+   .full-width-media {
+      margin: $pad-small 0 0;
+      @include width(10,9);
+   }
+   .cta {
+      margin: $pad-small 0 0;
+   }
+   &::before {
+      content: '';
+      @include width(10,9);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 1px;
+      background: fade-out($color: $navy-dk, $amount: 0.7);
+   }
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding: $pad-xxlarge 0;
+      &:only-child{
+         overflow: scroll;
+         .text table{
+            @include ml(0,0);
+            @include width( 8,7);
+         }
+      }
+      .text {
+         > * {
+            margin: 0 0 $pad-xsmall;
+         }
+         > p {
+            margin: 0 0 $pad-xxsmall;
+            @include width(8,7);
+         }
+      }
+      .card-wrapper {
+         margin: $pad-small 0 0;
+         .text-card {
+            @include width(8,7);
+         }
+      }
+      .full-width-media {
+         @include width(8,7);
+      }
+      &::before {
+         @include width(8,7);
+      }
+   }
+
+   // ---------------------------------------------
+   // Variation
+   // ---------------------------------------------
+   [data-page="security"] &{
+      background: $white-mint;
+   }
+}

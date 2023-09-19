@@ -1,0 +1,187 @@
+section.features-block {
+   background-color: $navy-dk;
+   position: relative;
+   z-index: 3;
+   &.rounded {
+      border-radius: $block-rad $block-rad 0 0;
+   }
+
+   &.circular {
+      border-radius: 25vw 25vw 0 0;
+      background-color: transparent;
+      // &[data-scroll="in"]  header {
+      //    &:before,
+      //    &:after {
+      //       border-radius: 50% 50% 0 0;
+      //    }
+      // }
+      header {
+         padding-top: 230px;
+         overflow: hidden;
+         position: relative;
+         z-index: 3;
+         background-color: $off-white;
+         &:before,
+         &:after {
+            content: '';
+            position: absolute;
+            border-radius: 50% 50% 0 0;
+            width: 150vw;
+            left: -25vw;
+            height: 200%;
+            // transition: all 500ms 150ms $outCubic;
+            z-index: -1;
+         }
+         &:before {
+            top: $pad-medium;
+            background-color: $navy-dk;
+         }
+         &:after {
+            top: 0;
+            background-color: $blue-lt;
+            opacity: 0.7;
+            z-index: -2;
+            width: 160vw;
+            left: -30vw;
+         }
+         h6 {
+            margin: 0 auto $pad-xsmall;
+         }
+         h2 {
+            margin: 0 auto;
+         }
+         p {
+            margin: $pad-xsmall auto 0;
+         }
+      }
+      .features,
+      .feature {
+         background-color: $navy-dk;
+      }
+   }
+   &:before {
+      content: '';
+      position: absolute;
+      @include ml-mr(0, 0, 1);
+      height: 1px;
+      left: 0;
+      right: 0;
+      background-color: $white-mint;
+      opacity: 0.5;
+   }
+   [data-page='security'] & {
+      &:before {
+         content: none;
+      }
+   }
+   header {
+      padding: $pad-giant 0 0;
+      @include pl-pr(2, 2, 1);
+      text-align: center;
+      color: $white-mint;
+      > * {
+         max-width: 800px;
+         margin-left: auto;
+         margin-right: auto;
+      }
+   }
+
+   .features {
+      @include flex(flex, row, flex-start, flex-start);
+      position: relative;
+      .images,
+      .text-content {
+         width: 50%;
+         // height: 100vh;
+         > .text {
+            height: 80vh;
+            &:last-child,
+            &:first-child {
+               height: 100vh;
+            }
+            .text-link{
+               a:before{
+                  transform: translateY(-1.5px);
+               }
+               svg{
+                  vertical-align: unset;
+
+               }
+            }
+         }
+      }
+      .images {
+         position: sticky;
+         top: 0;
+         height: 100vh;
+      }
+
+      //---------------------------
+      .media-wrapper {
+         position: absolute;
+         top: 0;
+         bottom: 0;
+         @include width(5, 5);
+         @include ml(1, 0, 1);
+         display: grid;
+         justify-content: center;
+         align-content: center;
+         opacity: 0;
+         transition: opacity 450ms ease-in-out;
+         // &:first-child{opacity: 1;}
+         &.active {
+            opacity: 1;
+         }
+         img, video {
+            max-height: 375px;
+         }
+      }
+      //---------------------------
+      .text {
+         @extend .global-featured-content-item;
+      }
+   }
+
+   // .feature {}
+
+   // NOTE: Look at _partial-content-item.scss
+   @media #{$phone}, #{$tablet-portrait} {
+      header {
+         padding: $pad-medium 0;
+         @include pl-pr(0, 0, 1);
+      }
+      &.rounded {
+         border-radius: $mobile-block-rad $mobile-block-rad 0 0;
+      }
+      &.circular {
+         header {
+            padding-top: $pad-xxlarge;
+            > :first-child {
+               margin-top: $pad-xxlarge;
+            }
+            &:before,
+            &:after {
+               border-radius: 50% 50% 0 0;
+               height: 100%;
+            }
+         }
+      }
+      .content-item.feature {
+         padding-top: $pad-small;
+         padding-bottom: $pad-small;
+         &:first-of-type {
+            padding-top: 0;
+         }
+         .media-wrapper{
+            margin-bottom: $pad-xxsmall;
+         }
+         .text {
+            width: 100%;
+            margin-left: 0;
+            .number {
+               margin: $pad-xsmall 0;
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,67 @@
+div.dropdown-partial {
+   width: 100%;
+   position: relative;
+   background: $white;
+   border: solid 1px $navy-dk;
+   border-radius: 26px;
+   .dropdown-selected {
+      @include flex(flex, row, center, space-between);
+      gap: $pad-xxsmall;
+      padding: $pad-xxsmall $pad-xsmall;
+      border-radius: 26px;
+      overflow: hidden;
+      transition: all 0.25s $outCubic;
+      cursor: pointer;
+      .selected-label {
+         @extend .text-link;
+         transition: color 0.25s $outCubic;
+      }
+      .dropdown-arrow {
+         transition: transform 0.25s $outCubic;
+         width: 10px;
+      }
+      &:hover {
+         .selected-label {
+            color: $mint;
+         }
+      }
+   }
+   .dropdown-options {
+      overflow: hidden;
+      width: 100%;
+      max-height: 0;
+      transition: max-height 0.25s $outCubic;
+      .option {
+         overflow: hidden;
+         padding: $pad-xxsmall $pad-xsmall;
+         border-radius: 26px;
+         opacity: 0;
+         transition: opacity 0.25s $outCubic;
+         cursor: pointer;
+         &.option-active {
+            display: none;
+         }
+         .option-label {
+            @extend .text-link;
+            transition: color 0.25s $outCubic;
+         }
+         &:hover {
+            .option-label {
+               color: $mint;
+            }
+         }
+      }
+   }
+   &.dropdown-active {
+      .dropdown-selected {
+         .dropdown-arrow {
+            transform: rotate(-180deg);
+         }
+      }
+      .dropdown-options {
+         .option {
+            opacity: 1;
+         }
+      }
+   }
+}

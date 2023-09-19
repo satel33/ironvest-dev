@@ -1,0 +1,69 @@
+section.pricing-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   padding: calc(126px + $pad-medium) 0 $pad-xxlarge;
+   background: $white-mint;
+   @include flex(flex, column, center, center);
+   .text {
+      @include width(8,7);
+      > * {
+         text-align: center;
+      }
+      > h6 {
+         margin: 0 0 $pad-xsmall;
+      }
+      > h1 {
+         margin: 0 0 $pad-xsmall;
+         b {
+            display: block;
+            @extend .h1, .serif;
+         }
+      }
+      > p {
+         @include width(8,7);
+         max-width: 700px;
+      }
+      margin: 0 0 $pad-small;
+   }
+   .toggle-partial {
+   }
+   .toggle-text {
+      @extend .p-xs;
+      @include width(8,7);
+      text-align: center;
+      margin: $pad-xxsmall 0 0;
+   }
+   .pricing-card-wrapper {
+      margin: $pad-giant 0 0;
+      @include flex(flex, row, flex-start, center);
+      gap: $gutter;
+      .pricing-card {
+         flex: 1;
+         @include width(4,3);
+      }
+   }
+
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding: calc(113.5px + $pad-xxlarge) 0 $pad-xxlarge;
+      .text {
+         > p {
+            width: 100%;
+         }
+      }
+      .pricing-card-wrapper {
+         margin: $pad-xxlarge 0 0;
+      }
+      .pricing-card-wrapper {
+         @include flex(flex, column, stretch, stretch);
+         gap: $pad-xxsmall;
+         .pricing-card {
+            padding: $pad-small $pad-xsmall;
+            @include width(8,7);
+         }
+      }
+   }
+}

@@ -1,0 +1,66 @@
+section.hubspot-form {
+   padding-top: $pad-giant;
+   padding-bottom: $pad-giant;
+   // @include width(10,9);
+   margin: 0 auto;
+   @include pl-pr(0,0,1);
+
+   form {
+      max-width: 700px;
+      margin: 0 auto;
+      .hs_error_rollup {
+      }
+      .field {
+         width: 100%;
+         margin-bottom: $pad-xsmall;
+         label:not(.hs-error-msg) {
+            @extend .h6;
+         }
+         label.hs-error-msg {
+            color: red;
+            font-size: rem(14);
+         }
+      }
+      label.hs-main-font-element{
+         @extend .p;
+      }
+
+      textarea,
+      input[type='text'],
+      input[type='email'] {
+         width: 100%;
+         resize: none;
+         outline: none;
+         font-size: rem(18);
+         padding: $pad-tiny $pad-tiny;
+      }
+
+      .hs-button,
+      input[type='submit'] {
+         appearance: none;
+         display: block;
+         background: none;
+         margin: 0;
+         cursor: pointer;
+         padding: $pad-tiny $pad-xsmall;
+         border: 1px solid $navy-dk;
+         outline: none;
+         border-radius: $btn-rad;
+         // box-shadow: 0px 0px 0px 1px $navy-dk inset;
+         font-family: $poppins;
+         font-weight: 600;
+         font-size: $btn-FS;
+         line-height: $btn-LH;
+         letter-spacing: $btn-LS;
+         transition: all 0.25s $outCubic;
+         box-shadow: 0px 0px 0px 0px $navy ;
+         &:hover {
+            background-color: $navy-dk;
+            color: white;
+            // transform: translate(6px, -6px);
+            // box-shadow: -6px 6px 0px 0px $mint ;
+            
+         }
+      }
+   }
+}

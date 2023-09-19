@@ -1,0 +1,117 @@
+section.career-block{
+   @include flex(flex, row, flex-start, space-between);
+   background-color: $white-mint;
+   padding: $pad-giant 0;
+   position: relative;
+   z-index: 3;
+   // for next card rounded corners
+   &:after{
+      content: '';
+      position: absolute;
+      height: 40px;
+      width: 100%;
+      top: 100%;
+      background-color: $white-mint;
+      z-index: 0;
+   }
+   .media-wrapper{
+      @include width(6,5,1);
+      border-radius: 0 $media-rad $media-rad 0;
+      overflow: hidden;
+   }
+   .text{
+      @include width(4,3);
+      margin: auto 0;
+      @include ml(1,2);
+      @include mr(1,1,1);
+      color: $navy-dk;
+      p{
+         @extend .p-s;
+      }
+      .blurb {
+         :first-child {
+            margin-top: 0;
+         }
+         * {
+            margin: $pad-xsmall 0;
+         }
+         :last-child {
+            margin-bottom: 0;
+         }
+      }
+
+      div.openings {
+         margin: $pad-medium 0 0;
+         .opening {
+            display: block;
+            margin: 0 0 $pad-xsmall;
+            width: max-content;
+            max-width: 100%;
+            color: $navy-dk;
+            transition: color .25s $outCubic;
+            &:last-of-type {
+               margin: 0;
+            }
+            &:hover{
+               color: $mint;
+            }
+            h6{
+               margin: $pad-tiny 0 0 0;
+               color: $grey-dk;
+            }
+         }
+      }
+      .cta {
+         margin: $pad-medium 0 0;
+      }
+   }
+   @media #{$phone}, #{$tablet-portrait}{
+      display: block;
+      padding: $pad-large 0 $pad-xxlarge;
+      .media-wrapper{
+         @include width(8,7,1);
+      }
+      .text{
+         margin: $pad-medium 0 0;
+         @include width(8,7); 
+         @include ml-mr(0,0,1);
+         div.openings {
+            margin: $pad-small 0 0;
+            .opening {
+               display: block;
+               margin: 0 0 $pad-small;
+               h6{
+                  font-size: rem(10);
+               }
+            }
+         }
+         .cta {
+            margin: $pad-small 0 0;
+         }
+      }
+   }
+
+   // ---------------------------------------------
+   // Color
+   // ---------------------------------------------
+   &.bg-dark {
+      background-color: $navy-dk;
+      &:after{
+         background-color: $navy-dk;
+      }
+      .text {
+         color: $off-white;
+         div.openings {
+            .opening {
+               color: $off-white;
+               &:hover{
+                  color: $mint-lt;
+               }
+               h6{
+                  color:$grey;
+               }
+            }
+         }
+      }
+   }
+}

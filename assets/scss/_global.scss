@@ -1,0 +1,259 @@
+body,
+html {
+   --alert-bar-height: 0;
+   font-family: $poppins;
+   font-weight: 500;
+   font-size: $base-FS;
+   color: $copy;
+   
+   &.menu-open {
+      overflow: hidden;
+   }
+   [data-page='homepage'] {
+      background-color: $white-mint;
+   }
+   [data-page='security'] {
+      background-color: $navy-dk;
+   }
+   [data-page='personal'] {
+      background-color: $off-white;
+   }
+
+   [data-stick='true'] {
+      &.stuck {
+         position: sticky !important;
+         top: 0;
+      }
+      &.stuck-bottom {
+         position: sticky !important;
+      }
+   }
+
+   [data-rounded-corners="true"] {
+      // z-index: map-get($index, card) !important;
+      position: relative;
+      transform:translateZ(1px);
+   }
+   #pageBlocks > section{
+      @for $count from 1 through 20 {
+         &:nth-child(#{$count}){z-index: $count;}
+      }
+   }
+
+}
+
+.lock-scroll {
+   position: fixed;
+}
+
+figure {
+   margin: 0;
+}
+
+img,
+.global-img {
+   display: block;
+   margin: 0;
+   transition: filter 500ms 200ms ease-in-out;
+   &.obj-cover,
+   &.img-cover {
+      object-fit: cover;
+      object-position: center center;
+      width: 100%;
+      height: 100%;
+      font-family: 'object-fit: cover';
+   }
+   &.obj-contain,
+   &.img-contain {
+      object-fit: contain;
+      object-position: center center;
+      width: 100%;
+      height: 100%;
+      font-family: 'object-fit: contain';
+   }
+   &[lazy="loading"]{
+      filter: blur(10px);
+   }
+}
+
+//===============================================================/
+//  Global Card styles
+//===============================================================/
+
+.global-card {
+   overflow: hidden;
+   background: $white;
+   border: 1px solid $navy-dk;
+   border-radius: $card-rad;
+   padding: $pad-xxsmall $pad-small;
+
+   @media #{$mobile} {
+      padding: $pad-xxsmall $pad-xsmall;
+   }
+}
+
+.global-card-shadow {
+   box-shadow: 0px 8px 16px fade-out($color: $card-shadow, $amount: 0.9);
+}
+
+.global-toggle-shadow {
+   box-shadow: 0px 2px 4px fade-out($color: $card-shadow, $amount: 0.85);
+}
+
+//===============================================================/
+//  Global Slider Ctrl styles
+//===============================================================/
+div.slider-ctrls {
+   @include flex(flex, row, center, center);
+   gap: $gutter;
+   .ctrl-btn {
+      width: 60px;
+      height: 60px;
+      border: 1px solid $navy-dk;
+      border-radius: 100%;
+      cursor: pointer;
+   }
+   @media #{$mobile} {
+      gap: $pad-xxsmall;
+      .ctrl-btn {
+         width: 50px;
+         height: 50px;
+      }
+   }
+}
+//===============================================================/
+//  Global Block Bottom Line
+//===============================================================/
+
+.global-bottom-line {
+   &:after {
+      content: '';
+      position: absolute;
+      @include width(12, 11);
+      @include ml-mr(0, 0, 1);
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: $off-white;
+      opacity: 0.4;
+   }
+}
+
+.global-bottom-line-dark {
+   &:after {
+      content: '';
+      position: absolute;
+      @include width(12, 11);
+      @include ml-mr(0, 0, 1);
+      height: 1px;
+      bottom: 0;
+      left: 0;
+      background-color: $navy-dk;
+      opacity: 0.2;
+   }
+   @media #{$phone} {
+      &:after {
+         @include width(8, 7);
+      }
+   }
+}
+
+//===============================================================/
+// Alert Bar
+//===============================================================/
+
+.alert-bar {
+   text-align: center;
+   background-color: $teal-dk;
+   color: white;
+   @include flex(flex, row, center, center);
+   padding: $pad-xxsmall;
+   border-radius: $pad-tiny;
+   // border-radius: $media-rad;
+   overflow: hidden;
+   @include ml-mr(0, 1, 0);
+   margin-top: $pad-xxsmall;
+   p {
+      margin: 0 $pad-xxsmall 0 0;
+      width: auto;
+   }
+   &.orange{
+      background-color: $orange-dk
+   }
+   &.navy{
+      background-color: $navy
+   }
+
+   @media #{$phone} {
+      @include flex(flex, column, flex-start, center);
+      margin-top: $pad-tiny;
+      text-align: left;
+      .cta {
+         margin-top: 4px;
+      }
+   }
+}
+
+//===============================================================/
+// GDPR Alert
+//===============================================================/
+div.gdpr-alert-bar {
+   position: fixed;
+   bottom: $gutter;
+   left: $gutter;
+   background-color: $navy-dk;
+   @include width(8, 7);
+   max-width: 650px;
+   z-index: map-get($index, 'gdpr');
+   border-radius: $card-rad;
+   padding: $pad-xxsmall;
+   .close {
+      cursor: pointer;
+      position: absolute;
+      top: $pad-xxsmall;
+      right: $pad-xxsmall;
+   }
+   * {
+      color: white;
+   }
+   a {
+      color: $white-mint;
+      text-decoration: underline;
+   }
+}
+
+
+
+.global-featured-content-item{
+   @include width(4, 3);
+   @include ml(1, 0.5);
+   @include flex(flex, column, flex-start, center);
+   color: $white-mint;
+   h3 {
+      margin-top: 0;
+      margin-bottom: $pad-xxsmall;
+   }
+   p {
+      @extend .p-s;
+   }
+   ul {
+      margin-bottom: $pad-xxsmall;
+      padding-left: 0;
+      li {
+         position: relative;
+         padding-left: $pad-xsmall;
+         list-style: none;
+         &:before {
+            content: '';
+            background-image: url('~/assets/images/checkmark.svg');
+            height: 16px;
+            width: 16px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: absolute;
+            top: 5px;
+            left: 1px;
+         }
+      }
+   }
+}

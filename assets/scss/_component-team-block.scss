@@ -1,0 +1,149 @@
+section.team-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   background: $navy-dk;
+   padding: $pad-giant 0;
+   @include pl-pr(0, 0, 1);
+   border-radius: $block-rad $block-rad 0 0;
+   overflow: hidden;
+   .eyebrow,
+   .headline,
+   .member-name,
+   .member-title {
+      color: $white-mint;
+   }
+   .eyebrow {
+      @extend .global-label;
+      @include width(6, 5);
+      text-align: center;
+   }
+   .headline {
+      @include width(6, 5);
+      text-align: center;
+      margin: 0 auto $pad-large;
+   }
+   .team-wrapper {
+      // display: grid;
+      // grid-template-columns: repeat(5, 1fr);
+      // grid-auto-rows: 1fr;
+
+      // column-gap: $gutter;
+      // row-gap: $pad-medium;
+      // justify-content: center;
+      @include pl-pr(1, 0, 0);
+      @include flex(flex, row, flex-start, center);
+      flex-wrap: wrap;
+      .team-member {
+         // margin-right: $gutter;
+         @include ml-mr(0, 0.5);
+         @include width(2, 1);
+         margin-bottom: $pad-medium;
+         figure.member-media {
+            position: relative;
+            border-radius: $media-rad;
+            overflow: hidden;
+            width: 100%;
+            height: 15vw;
+            &:after{
+               content: '';
+               position: absolute;
+               inset: 0;
+               opacity: .2;
+               background: linear-gradient(
+                  0deg,
+                  rgba(242, 249, 241, 0.4),
+                  rgba(242, 249, 241, 0.4)
+               );
+               background-blend-mode: color, normal;
+            }
+            img {
+               filter: grayscale(100%), blur( 6px);
+               &[lazy="loaded"]{
+                  filter: grayscale(100%);
+               }
+               @extend .obj-cover;
+            }
+         }
+         .member-name {
+            @extend .serif;
+            margin: $pad-xxsmall 0 0;
+         }
+         .member-title {
+            @extend .p-s;
+            margin: $pad-tiny 0 0;
+         }
+         .member-socials {
+            @include flex(flex, row, flex-start, flex-start);
+            gap: $pad-tiny;
+            margin: $pad-xxsmall 0 0;
+            a {
+               display: block;
+               width: 32px;
+               height: 32px;
+               border-radius: 100%;
+               border: solid 1px $white-mint;
+               transition: border-color 0.25s $outCubic;
+               svg {
+                  path {
+                     transition: fill 0.25s $outCubic;
+                  }
+               }
+               &:hover {
+                  border-color: $mint-lt;
+                  background: $mint-lt;
+                  svg {
+                     path {
+                        fill: $navy-dk;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding-top: $pad-xxlarge;
+      padding-bottom: $pad-xlarge;
+      border-radius: $mobile-block-rad $mobile-block-rad 0 0;
+      .eyebrow {
+         @include width(8, 7);
+      }
+      .headline {
+         @include width(8, 7);
+         margin: 0 auto $pad-small;
+      }
+      .team-wrapper {
+         @include flex(flex, column, flex-start, flex-start);
+         @include pl-pr(0,0,0);
+         .team-member {
+            @include width (8,7);
+            @include flex(flex, row, flex-start, flex-start);
+            figure.member-media {
+               width: 35%;
+               height: 25vw;
+               border-radius: $card-rad;
+               margin-right: $pad-xxsmall;
+            }
+            .info{
+               width: 65%;
+            }
+            .member-name {
+               margin:  0 0;
+               font-size: rem(22);
+            }
+            .member-title {
+               margin: 4px 0 0;
+               font-size: rem(14);
+            }
+            .member-socials {
+               margin: $pad-tiny 0 0;
+            }
+         }
+      }
+   }
+}

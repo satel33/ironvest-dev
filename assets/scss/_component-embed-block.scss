@@ -1,0 +1,14 @@
+section.embed-block {
+   padding: $pad-big 0;
+   @include pl-pr(1,1,1);
+   @include flex(flex, column, center, center);
+   position: relative;
+   
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding: $pad-xxlarge 0;
+      @include pl-pr(0,0,1);
+   }
+}

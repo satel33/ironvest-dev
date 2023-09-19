@@ -1,0 +1,237 @@
+//===============================================================/
+//  Break Point Helpers
+//===============================================================/
+
+.hide-on-mobile {
+   @media #{$tablet-portrait} {
+      display: none !important;
+   }
+   @media #{$phone} {
+      display: none !important;
+   }
+}
+.hide-on-tablet {
+   @media #{$tablet} {
+      display: none !important;
+   }
+}
+.hide-on-phone {
+   @media #{$phone} {
+      display: none !important;
+   }
+}
+.only-on-mobile {
+   display: none !important;
+   @media #{$tablet-portrait} {
+      display: block !important;
+   }
+   @media #{$phone} {
+      display: block !important;
+   }
+}
+.only-on-phone {
+   // @media #{$full}{
+   display: none !important;
+   // }
+   @media #{$phone} {
+      display: block !important;
+   }
+}
+
+//===============================================================/
+//  Visible Helpers
+//===============================================================/
+
+.hidden {
+   display: none !important;
+}
+
+.stop-scroll {
+   overflow: hidden;
+}
+
+//===============================================================/
+//  Align Helpers
+//===============================================================/
+
+.vert-center {
+   position: relative;
+   top: 50%;
+   @include transform(translateY(-50%));
+}
+
+.horz-center {
+   position: relative;
+   left: 50%;
+   @include transform(translateX(-50%));
+}
+.both-center {
+   position: relative;
+   left: 50%;
+   top: 50%;
+   @include transform(translateY(-50%) translateX(-50%));
+}
+
+.text-center {
+   text-align: center;
+}
+
+.float-left {
+   float: left;
+}
+
+.float-right {
+   float: right;
+}
+
+.full-width {
+   width: 100%;
+}
+
+.center {
+   float: none !important;
+   margin-left: auto !important;
+   margin-right: auto !important;
+}
+
+//===============================================================/
+//  Margin Helpers
+//===============================================================/
+@for $i from 1 through 20 {
+   .mt#{$i} {
+      margin-top: 8px * $i;
+   }
+   .mb#{$i} {
+      margin-bottom: 8px * $i;
+   }
+   .pt#{$i} {
+      padding-top: 8px * $i;
+   }
+   .pb#{$i} {
+      padding-bottom: 8px * $i;
+   }
+}
+
+//===============================================================/
+//  Grid Helpers
+//===============================================================/
+
+@mixin ml($col, $gut, $outGut: 0) {
+   margin-left: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      margin-left: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+@mixin mr($col, $gut, $outGut: 0) {
+   margin-right: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      margin-right: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+@mixin ml-mr($col, $gut, $outGut: 0) {
+   margin-left: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   margin-right: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      margin-left: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+      margin-right: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+@mixin pl($col, $gut, $outGut: 0) {
+   padding-left: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      padding-left: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+@mixin pr($col, $gut, $outGut: 0) {
+   padding-right: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      padding-right: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+@mixin pl-pr($col, $gut, $outGut: 0) {
+   padding-left: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   padding-right: (
+      ($column * $col) + ($gutter * $gut) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      padding-left: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+      padding-right: (
+         ($phoneColumn * $col) + ($phoneGutter * $gut) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+@mixin width($columnnum, $gutternum, $outGut: 0) {
+   width: (
+      ($columnnum * $column) + ($gutternum * $gutter) + ($outerGutter * $outGut)
+   );
+   @media #{$phone} {
+      width: (
+         ($columnnum * $phoneColumn) + ($gutternum * $phoneGutter) +
+            ($phoneOuterGutter * $outGut)
+      );
+   }
+}
+
+//===============================================================/
+//  Clear Helpers
+//===============================================================/
+.clear:before {
+   content: '';
+   display: table;
+}
+.clear:after {
+   content: '';
+   display: table;
+   clear: both;
+}
+.no-clear:before {
+   content: normal;
+   display: inherit;
+}
+.no-clear:after {
+   content: normal;
+   display: inherit;
+   clear: none;
+}

@@ -1,0 +1,53 @@
+div.text-card {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   @extend .global-card;
+   background: none;
+   padding: $pad-large;
+   @include flex(flex, row, stretch, stretch);
+   gap: $pad-big;
+   .text-col {
+      &.text-left {
+         flex: 1;
+      }
+      &.text-right {
+         width: calc(37.9166666667vw - $pad-large);
+         .text-card-text {
+            p {
+               @extend .p-s;
+            }
+         }
+      }
+      > * {
+         margin: 0 0 $pad-xxsmall;
+      }
+      :last-child {
+         margin-bottom: 0;
+      }
+   }
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      @include flex(flex, column, stretch, stretch);
+      padding: $pad-xsmall $pad-xxsmall;
+      gap: $pad-xsmall;
+      .text-col {
+         &.text-right {
+            width: 100%;
+            .text-card-text {
+               p {
+                  margin: 0 0 $pad-tiny;
+               }
+               :last-child {
+                  margin-bottom: 0;
+               }
+            }
+         }
+         > * {
+            text-align: center;
+         }
+      }
+   }
+}

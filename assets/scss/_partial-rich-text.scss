@@ -1,0 +1,17 @@
+div.rich-text-wrapper {
+   a {
+      display: inline;
+      color: $navy;
+      text-decoration: underline;
+      &:hover{
+         color:$teal-dk ;
+      }
+   }
+   ul {
+      padding-left: $pad-xxsmall;
+      li{
+         list-style: disc;
+      }
+      
+   }
+}

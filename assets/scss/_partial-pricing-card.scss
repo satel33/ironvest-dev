@@ -1,0 +1,146 @@
+div.pricing-card {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   @extend .global-card;
+   @extend .global-card-shadow;
+   padding: $pad-large;
+   @include flex(flex, column, center, flex-start);
+   row-gap: $pad-small;
+   &.w-banner {
+      position: relative;
+      overflow: visible;
+      border-radius: 0 0 $card-rad $card-rad;
+      .card-banner {
+         position: absolute;
+         bottom: 100%;
+         left: -1px;
+         width: calc(100% + 2px);
+         border-radius: $card-rad $card-rad 0 0;
+         background: $mint;
+         border: 1px solid $navy-dk;
+         padding: 11px $pad-xxsmall $pad-tiny;
+         .card-banner-text {
+            @extend .p-xs;
+            width: max-content;
+            margin: 0 auto;
+         }
+      }
+   }
+   .card-title-wrapper {
+      width: 100%;
+      .card-title {
+         @extend .serif;
+         margin: 0;
+         text-align: center
+      }
+      .card-desc {
+         @extend .p-xs;
+         margin: $pad-xxsmall 0 0;
+         text-align: center
+      }
+   }
+   .card-price {
+      @extend .h1;
+      margin: 0;
+      color: $mint;
+   }
+   .cta {
+      &.style-secondary {
+         background: $white-mint;
+      }
+   }
+   .card-text {
+      border: solid $grey;
+      border-width: 1px 0 0 0;
+      width: 100%;
+      padding: $pad-large 0 0;
+      p {
+         @extend .p-s;
+      }
+      > p {
+         margin: 0 0 $pad-xsmall;
+      }
+      ol,
+      ul {
+         margin: 0;
+         padding: 0;
+         li {
+            margin: 0;
+            p {
+               margin: 0 0 $pad-xxsmall;
+            }
+         }
+      }
+      ol {
+         margin: 0 0 $pad-xsmall;
+         padding: 0 0 0 $pad-xsmall;
+         li {
+            position: relative;
+            list-style: none;
+            &::before {
+               width: 14px;
+               content: url('~/assets/images/ol-tick.svg');
+               position: absolute;
+               top: 48%;
+               right: 103%;
+               transform: translateY(-50%);
+            } 
+            &:last-of-type {
+               p {
+                  margin: 0;
+               }
+            }
+         }
+      }
+      ul {
+         padding: 0 0 0 $pad-xsmall;
+         li {
+            position: relative;
+            list-style: none;
+            // p{ font-weight: 700;}
+            &::before {
+               width: 16px;
+               content: url('~/assets/images/ul-arrow.svg');
+               position: absolute;
+               top: 38%;
+               right: 102.75%;
+               transform: translateY(-50%);
+            }
+         }
+      }
+      p i {
+         @extend .p, .p-xs;
+         font-size: rem(12);
+         display: block;
+         font-style: normal;
+         opacity: 0.6;
+         padding: 0 0 0 $pad-xsmall;
+      }
+      > :last-child {
+         margin: 0;
+      }
+   }
+
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      row-gap: $pad-xxsmall;
+      &.w-banner {
+         margin-top: $pad-medium;
+      }
+      .card-price {
+         margin: $pad-tiny;
+      }
+      .cta {
+         margin: $pad-xxsmall;
+      }
+      .card-text {
+         padding: $pad-small 0 0;
+         > p {
+            margin: 0 0 $pad-xxsmall;
+         }
+      }
+   }
+}

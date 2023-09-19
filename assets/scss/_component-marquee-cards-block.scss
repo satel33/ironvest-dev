@@ -1,0 +1,213 @@
+section.marquee-cards-block {
+   text-align: center;
+   overflow: hidden;
+   padding: $pad-giant 0;
+   position: relative;
+   background-color: $white-mint;
+   z-index: 3;
+   &.straight {
+      @extend .global-bottom-line-dark;
+      .text {
+         margin: 0 auto;
+         @include width(8, 7);
+         h6,
+         h3,
+         p {
+            margin: $pad-xsmall 0 0;
+         }
+         p {
+            margin-left: auto;
+            margin-right: auto;
+            @include width(6, 5);
+         }
+         :first-child {
+            margin-top: 0;
+         }
+      }
+      .cards {
+         margin: $pad-big 0 0;
+         div.marquee-card {
+            margin: 0 $pad-xsmall 0 0;
+         }
+         > div {
+            margin-bottom: $pad-small;
+         }
+         .marquee-row_2 {
+            margin-bottom: 0;
+         }
+      }
+   }
+
+   &.curved {
+      padding-bottom: $pad-xlarge;
+      .text {
+         padding-bottom: $pad-medium;
+         @include width(10, 9);
+         max-width: 700px;
+         margin-left: auto;
+         margin-right: auto;
+      }
+      .cards {
+         flex-wrap: nowrap;
+         @include flex(flex, row, stretch, flex-start);
+         position: relative;
+         height: 400px;
+
+         > svg {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+
+            path {
+               fill: transparent;
+               // stroke:red;
+               // stroke-width: 1px;
+            }
+         }
+         .marquee-card {
+            margin-top: $pad-medium;
+            width: 17vw;
+            height: 20vw;
+         }
+      }
+      .action {
+         width: 100%;
+         text-align: center;
+         margin-bottom: $pad-xlarge;
+         @include flex(flex, row, center, center);
+      }
+      .overlay {
+         position: absolute;
+         left: calc(50% - (350px/2));
+         top: 0;
+         height: 350px;
+         width: 350px;
+         z-index: 10;
+         // transform: translateX(-50%);
+         border-radius: 16px;
+         overflow: hidden;
+         // background-color: white;
+         @include flex(flex, column, center, space-between);
+         // border: 1px solid white;
+
+         opacity: 1;
+         -webkit-backdrop-filter: blur(20px);
+         backdrop-filter: blur(20px);
+         // background-color: transparent;
+         background-color: fade-out($navy-dk, 0.8);
+         border: 0px;
+         > img {
+            &:first-child {
+               margin-top: $pad-medium;
+            }
+            &:last-child {
+               margin-bottom: $pad-medium;
+            }
+         }
+         
+         // @-moz-document url-prefix() {
+         //    background-color: $navy-dk;
+         //    border: 1px solid $navy-dk;
+            
+         // }
+        
+      }
+   }
+
+   &.round-corners {
+      border-radius: $pad-xsmall $pad-xsmall 0 0;
+      overflow: hidden;
+      z-index: 5;
+   }
+   // Style
+   &.dark {
+      background-color: $navy-dk;
+      .text * {
+         color: white;
+      }
+      .cards {
+         .marquee-card {
+            background-color: $navy;
+            border-color: $mint-lt;
+            color: white;
+         }
+      }
+      .overlay {
+         
+         background-color: fade-out( white, 0.8);
+         // @-moz-document url-prefix() {
+         //    opacity: .9;
+         //    background-color: white;
+         //    border: 1px solid white;
+         // }
+      }
+   }
+
+   @media #{$phone},#{$tablet-portrait} {
+      &.curved {
+         padding-bottom: $pad-big;
+         .text {
+            @include width(8, 7);
+         }
+         .cards {
+            height: unset;
+            .marquee-card {
+               margin-top: $pad-medium;
+               width: 150px;
+               height: 150px;
+               margin-right: $pad-small;
+            }
+         }
+         .action {
+            margin: $pad-xlarge auto 0;
+         }
+         .overlay {
+            position: absolute;
+
+            top: 0;
+            height: 225px;
+            width: 200px;
+            left: calc(50% - (200px/2));
+            > img {
+               &:first-child {
+                  width: 80%;
+               }
+            }
+         }
+      }
+      &.straight {
+         padding: $pad-xxlarge 0;
+         .text {
+            h6,
+            h3 {
+               margin-top: $pad-xxsmall;
+            }
+            p {
+               width: 100%;
+               margin-top: $pad-small;
+            }
+         }
+         .cards {
+            margin-top: $pad-small;
+            div.marquee-card {
+               margin: 0 $pad-tiny 0 0;
+               .media-wrapper {
+                  height: 64px;
+                  width: 64px;
+               }
+            }
+            > div {
+               margin-bottom: $pad-tiny;
+            }
+            .marquee-row_2 {
+               margin-bottom: $pad-tiny;
+            }
+            .marquee-row_3 {
+               margin-bottom: 0;
+            }
+         }
+      }
+   }
+}

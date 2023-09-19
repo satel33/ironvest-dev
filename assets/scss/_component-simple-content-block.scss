@@ -1,0 +1,19 @@
+section.simple-content-block {
+   position: relative;
+   background-color: white;
+   header {
+      padding: $pad-xlarge 0 0;
+      @include pl-pr(2, 2, 1);
+      text-align: center;
+      > * {
+         max-width: 800px;
+         margin-left: auto;
+         margin-right: auto;
+      }
+   }
+   @media #{$phone} {
+      header{
+         @include pl-pr(0, 0, 1);
+      }
+   }
+}

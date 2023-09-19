@@ -1,0 +1,91 @@
+div.content-item{
+   @include flex(flex, row, center, space-between);
+   padding:$pad-xxlarge 0;
+   @include pl-pr(1,1,1);
+   &:first-child{padding-top: $pad-giant;}
+   &:last-child{padding-bottom: $pad-giant;}
+   .media-wrapper{
+      @include width(5,4);
+      // display: grid;
+      // justify-content: center;
+      // align-content: center;
+      img, video{ 
+         max-height: 400px;
+      }
+   }
+   .text {
+      @extend .global-featured-content-item;
+   }
+   
+   // Simple Content Block
+   &.simple{
+      &:nth-child(even){
+         flex-direction: row-reverse;
+      }
+      .text{
+         color: $navy-dk;
+         margin-left: 0;
+      }
+      &.w-media {
+         .media-wrapper {
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+         }
+      }
+   }
+  
+   @media  #{$phone}, #{$tablet-portrait} {
+      @include flex(flex, column, flex-start, flex-start);
+      padding: $pad-medium 0;
+      @include pl-pr(0,0,1);
+      &:first-child{padding-top: $pad-xxlarge;}
+      &:last-child{padding-bottom: $pad-xxlarge;}
+
+      .text,
+      .media-wrapper{
+         width: 100%;
+      }
+      .text{
+         margin-left: unset;
+         margin-top: $pad-xsmall;
+      }
+
+      &.feature{
+         padding-top: $pad-medium;
+         padding-bottom: $pad-medium;
+         &:nth-last-child(2) {
+            padding-bottom:$pad-big;
+         }
+         .media-wrapper{
+            margin: 0 auto;
+            max-height: 400px;
+            img, video{
+               height: auto;
+            }
+            video{
+               width: 90%;
+               margin: auto;
+            }
+            // max-width: 90%;
+         }
+         ul{
+            li{
+               padding-left: calc(#{$pad-xxsmall} + 4px);
+               &:before{
+                  height: 14px;
+                  width: 14px;
+                  top: 3px;
+                  left: 0px;
+               }
+              
+            }
+         }
+      }
+      &.simple{
+         &:nth-child(even){
+            flex-direction: column;
+         }
+      }
+   }
+}

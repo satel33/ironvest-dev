@@ -1,0 +1,271 @@
+footer#footer {
+   position: relative;
+   z-index: 15;
+
+   &:before {
+      content: '';
+      position: absolute;
+      inset: $pad-tiny;
+      z-index: 0;
+      background: linear-gradient(101.39deg, #ecf6ea 7.05%, #cffed7 94.24%);
+      border-radius: $media-rad;
+   }
+
+   // Page colors
+   [data-page='homepage'] &,
+   [data-page='pricing'] & {
+      background-color: $white-mint;
+   }
+
+   // CTA Bar
+   .cta-bar {
+      position: relative;
+      z-index: 1;
+      margin: 0px $pad-tiny;
+      border-bottom: 1px solid $grey;
+   }
+
+   //--------------------------------
+   .main-footer,
+   .bottom-footer {
+      position: relative;
+      @include flex(flex, row, stretch, space-between);
+
+      .left {
+         @include ml(0.5, 0, 1);
+
+         .logo-home-link {
+            display: block;
+            max-width: 100%;
+            text-align: center;
+
+            svg {
+               max-width: 275px;
+               height: auto;
+            }
+         }
+      }
+
+      .right {
+         @include width(6, 6);
+         @include mr(0.5, 0, 1);
+      }
+   }
+
+   //--------------------------------
+   .main-footer {
+      position: relative;
+      padding-top: $pad-big;
+      padding-bottom: $pad-big;
+
+      .right {
+         >ul {
+            @include flex(flex, row, stretch, flex-end);
+
+            span {
+               @extend .global-label;
+               margin-bottom: $pad-xxsmall;
+               display: block;
+            }
+
+            a {
+               font-size: rem(16);
+               color: $copy;
+               transition: color .25s $outCubic ;
+
+               &:hover {
+                  color: $teal-dk;
+               }
+            }
+
+            >li {
+               width: 33%;
+            }
+         }
+      }
+   }
+
+   //--------------------------------
+   // .bottom-footer {}
+   .social-links {
+      display: inline-flex;
+      justify-content: flex-end;
+
+      >a {
+         display: block;
+         margin-bottom: $pad-small;
+
+         &:not(:first-child) {
+            margin-left: $pad-xsmall;
+         }
+
+         svg {
+            width: 56px;
+            height: 56px;
+         }
+      }
+
+      &.mobile {
+         justify-content: center;
+         width: 100%;
+         margin: $pad-small auto;
+
+         >a {
+            svg {
+               width: 48px;
+               height: 48px;
+            }
+         }
+      }
+   }
+
+   //--------------------------------
+   .legal {
+      border-top: 1px solid $grey;
+      margin: 0px $pad-tiny;
+      padding-top: $pad-xsmall;
+      padding-bottom: $pad-xsmall;
+      font-size: rem(14);
+      font-weight: 400;
+      color: $grey;
+      position: relative;
+      @include flex(flex, row, stretch, space-between);
+
+      .left {
+         @include ml(0.5, 0, 1);
+      }
+
+      .right {
+         width: auto;
+         text-align: right;
+         @include mr(0.5, 0, 1);
+      }
+
+      small {
+         font-size: rem(14);
+      }
+
+      a {
+         color: $grey;
+         margin-right: $pad-small;
+      }
+   }
+
+   form {
+      margin-bottom: $pad-medium;
+
+      p {
+         margin-top: $pad-tiny;
+      }
+
+      div.input-group {
+         width: 100%;
+         position: relative;
+
+         label {
+            margin-bottom: $pad-xxsmall;
+            display: block;
+         }
+
+         input {
+            appearance: none;
+            -webkit-appearance: none;
+            padding: $pad-xxsmall $pad-xsmall;
+            border-radius: $pad-tiny;
+            background-color: white;
+            width: 100%;
+            outline: none;
+            font-size: rem(16);
+            border: 1px solid $grey;
+         }
+      }
+
+      button {
+         appearance: none;
+         -webkit-appearance: none;
+         position: absolute;
+         outline: none;
+         border: 0px;
+         background-color: transparent;
+         top: calc(14px + $pad-xxsmall); //magic number
+         width: 50px;
+         bottom: 0;
+         right: 0;
+         padding-right: $pad-xxsmall;
+         text-align: right;
+         cursor: pointer;
+
+         // height: 100%;
+         svg {
+            margin-right: 0;
+            height: 12px;
+            width: auto;
+         }
+
+         &:before {
+            // arrow line
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: $pad-xxsmall;
+            width: 20px;
+            height: 2px;
+            border-radius: $btn-rad;
+            background: $navy-dk;
+            transition: width 0.25s $outCubic;
+            transform-origin: left center;
+         }
+
+         &:hover {
+            &:before {
+               width: 28px;
+            }
+         }
+      }
+   }
+
+   @media #{$phone},
+   #{$tablet-portrait} {
+
+      .main-footer {
+         padding-top: $pad-small;
+         padding-bottom: $pad-small;
+      }
+
+      .main-footer,
+      .bottom-footer,
+      .legal {
+         @include flex(flex, column);
+
+         .left,
+         .right {
+            @include width(8, 7);
+            @include ml-mr(0, 0, 1);
+         }
+
+         .right {
+            >ul {
+               text-align: center;
+               @include flex(flex, column, center, flex-start);
+               width: 100%;
+
+               >li {
+                  width: 100%;
+                  margin-bottom: $pad-small;
+               }
+            }
+         }
+      }
+
+      .legal{
+         .right{
+            text-align: center;
+         }
+         a{
+            display: block;
+            text-align: center;
+            margin-bottom: 8px;
+         }
+      }
+   }
+}

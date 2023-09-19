@@ -1,0 +1,111 @@
+section.investor-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   overflow: hidden;
+   @include flex(flex, column, center, center);
+   padding: $pad-big 0;
+   background: $navy-dk;
+   position: relative;
+   z-index: 1;
+   &.light {
+      background: $white-mint;
+      .eyebrow,
+      .headline {
+         color: $navy-dk;
+      }
+   }
+
+   &.rounded-corners {
+      border-radius: $block-rad $block-rad 0 0;
+      overflow: hidden;
+      z-index: 10;
+   }
+   .eyebrow,
+   .headline {
+      color: $white-mint;
+   }
+   .eyebrow {
+      @include width(6, 5);
+      text-align: center;
+      margin: 0 0 $pad-small;
+   }
+   .headline {
+      @include width(8, 7);
+      text-align: center;
+      margin: 0 0 $pad-xxlarge;
+   }
+   figure.investor{
+      h6 {
+         text-align: center;
+      }
+   }
+   .investor-wrapper {
+      &:not(.w-marquee) {
+         @include width(10, 9);
+         @include flex(flex, row, center, center);
+         flex-wrap: wrap;
+         column-gap: $pad-large;
+         row-gap: $pad-xlarge;
+         figure.investor {
+            display: block;
+            max-width: 200px;
+            text-align: center;
+            &.smaller {
+               max-width: 135px;
+            }
+            img {
+               @extend .obj-contain;
+               margin-bottom: $pad-xxsmall;
+            }
+         }
+      }
+      &.w-marquee {
+         height: 64px;
+         .investor {
+            display: block;
+            height: 100%;
+            width: 150px;
+            margin: 0 $pad-small;
+            img {
+               @extend .obj-contain;
+            }
+         }
+      }
+   }
+   .cta {
+      margin: $pad-xlarge 0 0;
+   }
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding-top: $pad-xxlarge;
+      padding-bottom: $pad-xlarge;
+      .eyebrow,
+      .headline {
+         @include width(8, 7);
+      }
+      .eyebrow {
+         margin: 0 0 $pad-xsmall;
+      }
+      .headline {
+         margin: 0 0 $pad-medium;
+      }
+      .investor-wrapper {
+         &.w-marquee {
+            height: 45px;
+            .investor {
+               width: 125px;
+               margin: 0 $pad-small;
+            }
+         }
+      }
+      .cta {
+         margin: $pad-medium 0 0;
+      }
+      &.rounded-corners {
+         border-radius: $mobile-block-rad $mobile-block-rad 0 0;
+      }
+   }
+}

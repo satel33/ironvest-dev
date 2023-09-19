@@ -1,0 +1,8 @@
+.DS_Store
+.nuxt/*
+.env
+.eslintcache
+package-lock.json
+
+node_modules/
+dist/

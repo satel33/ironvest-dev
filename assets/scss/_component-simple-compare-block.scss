@@ -1,0 +1,203 @@
+section.simple-compare-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   position: relative;
+   @include flex(flex, column, center, center);
+   padding: $pad-giant 0;
+   background: $navy-dk;
+   h2,
+   h6,
+   p {
+      color: $white-mint;
+   }
+   // Style -------
+   &.light {
+      background-color: $white-mint;
+      h2,
+      h6,
+      p {
+         color: $navy-dk;
+      }
+      .compare-table {
+         .cols-wrapper .col:first-of-type {
+            background-color: white;
+         }
+         .rows-wrapper .row:before {
+            border-color: $grey-lt;
+         }
+      }
+    
+   }
+   .headline-wrapper {
+      margin: 0 0 $pad-medium;
+      .headline {
+         @include width(8, 7);
+         text-align: center;
+         margin: 0;
+      }
+      .subheadline {
+         @extend .p-xs;
+         @include width(6, 5);
+         text-align: center;
+         margin: $pad-tiny auto 0;
+      }
+   }
+   .compare-table {
+      @include width(10, 9);
+      @include flex(flex, row, stretch, space-between);
+      gap: $pad-xxsmall;
+
+      .row,
+      .col-header,
+      .col-option {
+         height: 96px;
+      }
+
+      .rows-wrapper {
+         padding: 96px 0 0;
+         width: 100%;
+         flex: 1;
+         .row {
+            position: relative;
+            @include flex(flex, column, flex-start, center);
+            .row-text {
+               margin: 0;
+            }
+            &::before {
+               content: '';
+               position: absolute;
+               top: -1.5px;
+               left: 0;
+               height: 100%;
+               @include width(10, 9);
+               border: solid fade-out($color: $grey-lt, $amount: 0.6);
+               border-width: 1px 0 0;
+            }
+            &:last-of-type {
+               &::before {
+                  border-width: 1px 0;
+               }
+            }
+         }
+      }
+
+      .cols-wrapper {
+         @include flex(flex, row, stretch, stretch);
+         gap: $pad-xxsmall;
+         border-radius: $card-rad;
+         overflow: hidden;
+         &::after {
+            content: '';
+         }
+         .col {
+            width: 175px;
+            padding: 0 0 $pad-small;
+            .col-header {
+               @include flex(flex, column, center, center);
+               .col-header-logo {
+                  max-width: 125px;
+                  max-height: 50px;
+               }
+               .col-header-text {
+                  max-width: 125px;
+                  margin: 0;
+                  text-align: center;
+               }
+            }
+            .col-options {
+               .col-option {
+                  @include flex(flex, column, center, center);
+                  .option {
+                     width: 24px;
+                     height: 24px;
+                     &.compare-sometimes {
+                        @extend .p-xs;
+                        height: unset;
+                        width: unset;
+                     }
+                  }
+               }
+            }
+            &:first-of-type {
+               background: fade-out($color: $mint-lt, $amount: 0.85);
+               border-radius: $card-rad;
+               overflow: hidden;
+            }
+         }
+      }
+   }
+   .table-ctrls {
+      @include flex(flex, row, center, space-between);
+      @include width(8, 7);
+      margin: $pad-xxsmall 0 0;
+      .ctrls-wrapper {
+         @include width(3, 2);
+      }
+      .prompt {
+         @extend .small;
+         margin: 0;
+      }
+   }
+
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding: $pad-xxlarge 0;
+      .headline-wrapper {
+         margin: 0 0 $pad-small;
+         .subheadline {
+            @include width(8, 7);
+            margin: $pad-tiny 0 0;
+         }
+      }
+      .compare-table {
+         @include width(8, 7);
+         .row,
+         .col-header,
+         .col-option {
+            height: 76px;
+         }
+         .rows-wrapper {
+            padding: 76px 0 0;
+            @include width(5, 5);
+            .row {
+               &::before {
+                  @include width(8, 7);
+               }
+            }
+         }
+         .cols-wrapper {
+            &::after {
+               content: 'flickity';
+               display: none;
+            }
+            @include width(3, 2);
+            display: block;
+            .col {
+               padding: 0 0 $pad-xxsmall;
+               width: 100%;
+               .col-header {
+                  @include flex(flex, column, center, center);
+                  .col-header-logo {
+                     max-width: 90px;
+                     max-height: 40px;
+                  }
+                  .col-header-text {
+                     max-width: unset;
+                  }
+               }
+               .col-options {
+                  .col-option {
+                     .option {
+                        width: 20px;
+                        height: 20px;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,97 @@
+section.feature-tab-block {
+   position: relative;
+   @include flex(flex, row, flex-start, space-between);
+   padding: $pad-giant 0;
+   background-color: $off-white;
+   @extend .global-bottom-line-dark;
+   .left {
+      position: sticky;
+      top: $pad-giant;
+      @include ml(1, 1, 1);
+      @include width(4, 3);
+      h6 {
+         margin-top: 0;
+      }
+      h2 {
+         margin-top: 0px;
+         margin-bottom: $pad-xxsmall;
+         cursor: pointer;
+         transition: color .25s $outCubic;
+      }
+      .tab {
+         @include flex(flex, row, center, space-between);
+         &:not(.active) {
+            h2 {
+               color: $grey;
+               &:hover {
+                  color: $mint;
+               }
+            }
+            .plus span:last-child {
+               transform: rotate(90deg);
+            }
+         }
+      }
+      .plus {
+         height: 16px;
+         width: 16px;
+         position: relative;
+         span {
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background-color: $navy;
+            transition: transform 250ms ease;
+         }
+      }
+      .expandable{
+         overflow: hidden;
+         transform-origin: top center;
+      }
+   }
+   .right {
+      @include width(5, 4);
+      @include ml(1, 1);
+      @include mr(1, 1, 1);
+      .list-item {
+         &:last-of-type {
+            margin-bottom: 0;
+         }
+      }
+   }
+   .feature-tab-card {
+      @include width(5, 4);
+      @include flex(flex, row, flex-start, flex-start);
+      border: 1px solid $navy-dk;
+      border-radius: $media-rad;
+      padding: $pad-small;
+      margin-bottom: $pad-xsmall;
+      background-color: white;
+      .list-item-icon {
+         width: 32px;
+         height: 32px;
+         margin-right: $pad-xxsmall;
+      }
+      .list-item-text {
+         flex: 1;
+         h4 {
+            margin-top: 0;
+            margin-bottom: $pad-xxsmall;
+         }
+         p {
+            @extend .p-s;
+         }
+      }
+   }
+
+   @media #{$mobile} {
+      display: block;
+      .left {
+         @include width(8, 7);
+         @include ml(0, 0, 1);
+      }
+      .feature-tab-card {
+         width: 100%;
+      }
+   }
+}

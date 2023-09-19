@@ -1,0 +1,227 @@
+section.stats-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   overflow: hidden;
+   width: 100vw;
+   @include flex(flex, column, center, center);
+   padding: $pad-big 0;
+   background-color: $off-white;
+
+   .eyebrow {
+      @extend .global-label;
+      margin: 0 0 $pad-xsmall;
+      @include width(6, 5);
+      text-align: center
+   }
+
+   .headline {
+      margin: 0;
+      @include width(8, 7);
+      text-align: center;
+   }
+
+   &.simple-headers {
+      .headline {
+         @extend .serif;
+         @include width(6, 5);
+      }
+   }
+
+   .subheadline {
+      @extend .p-s;
+      margin: $pad-xsmall 0 0;
+      @include width(4, 3);
+      text-align: center
+   }
+
+   .stat-card-wrapper {
+      .stat-card {
+         @extend .global-card;
+         transition: box-shadow 0.25s $outCubic;
+
+         &:hover {
+            @extend .global-card-shadow;
+         }
+
+         .stat-eyebrow {
+            @extend .small;
+            margin: 0 0 $pad-tiny;
+            opacity: 0.7;
+         }
+
+         .stat-headline {
+            @extend .serif;
+            margin: 0 0 $pad-tiny;
+            width: 100%;
+         }
+
+         .stat-text {
+            @extend .p-xs;
+            opacity: 0.7;
+            width: 100%;
+         }
+      }
+   }
+
+   // Marquee
+   &.style-marquee {
+      .marquee-stat-card-wrapper {
+         margin: $pad-large 0 0;
+
+         .stat-card-wrapper {
+            .stat-card {
+               @include width(4, 3);
+               @include flex(flex, column, stretch, center);
+               margin: 0 $pad-xsmall 0 0;
+               max-width: 425px;
+            }
+         }
+      }
+   }
+
+   // Centered
+   &.style-centered {
+      .stat-card-wrapper {
+         @include pl-pr(1, 1, 1);
+         margin: $pad-medium 0 0;
+         @include flex(flex, row, stretch, center);
+         gap: $gutter;
+         flex-wrap: wrap;
+
+         .stat-card {
+            width: calc((100% - ($gutter * 2)) / 3);
+         }
+      }
+   }
+
+   &.style-left-right {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+         "label stats"
+         "headline stats"
+         "subheadline stats"
+         "cta stats";
+      column-gap: $column;
+      @include pl-pr(1, 1, 1);
+
+      h2,
+      h6,
+      p {
+         text-align: left;
+         width: auto;
+         padding-left: 0;
+      }
+
+      h6 {
+         grid-area: label;
+      }
+
+      h2 {
+         grid-area: headline;
+      }
+
+      p {
+         grid-area: subheadline;
+      }
+
+      .btn {
+         grid-area: cta;
+         justify-self: flex-start;
+      }
+
+      .stat-card-wrapper {
+         grid-area: stats;
+         align-self: flex-start;
+
+         .stat-card {
+            margin-bottom: $pad-xxsmall;
+         }
+      }
+   }
+
+   .cta {
+      margin: $pad-small 0 0;
+   }
+
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      padding: $pad-xxlarge 0 $pad-xlarge;
+
+      .eyebrow,
+      .headline,
+      .subheadline {
+         width: 100vw;
+         @include pl-pr(0, 0, 1);
+      }
+
+      .eyebrow {
+         margin: 0 0 $pad-xxsmall;
+      }
+
+      &.simple-headers {
+         .headline {
+            @include width(8, 7);
+            padding: 0;
+         }
+      }
+
+      .subheadline {
+         margin: $pad-xxsmall 0 0;
+      }
+
+      &.style-marquee {
+         .marquee-stat-card-wrapper {
+            margin: $pad-small 0 0;
+
+            .stat-card-wrapper {
+               .stat-card {
+                  @include width(8, 7);
+                  margin: 0 $pad-tiny 0 0;
+               }
+            }
+         }
+      }
+
+      &.style-centered {
+         .stat-card-wrapper {
+            @include pl-pr(0, 0, 1);
+            margin: $pad-xsmall 0 0;
+            @include flex(flex, column, stretch, stretch);
+            gap: $pad-xxsmall;
+
+            .stat-card {
+               width: 100%;
+            }
+         }
+      }
+
+      &.style-left-right {
+         @include pl-pr(0, 0, 1);
+         display: flex;
+         .stat-card-wrapper{
+            margin-top: $pad-small;
+         }
+      }
+   }
+
+   // ---------------------------------------------
+   // VARIATION
+   // ---------------------------------------------
+   [data-page="about-us"] & {
+      // about page
+      background: $white-mint;
+      border-radius: $block-rad $block-rad 0 0;
+   }
+
+   @media #{$phone} {
+      [data-page="about-us"] & {
+         // about page
+         border-radius: $mobile-block-rad $mobile-block-rad 0 0;
+      }
+   }
+}

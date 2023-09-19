@@ -1,0 +1,198 @@
+// ---------------------------------------------
+// Text
+// ---------------------------------------------
+
+.p,
+p {
+   font-family: $poppins;
+   font-weight: 400;
+   font-size: $p-FS;
+   line-height: $p-LH;
+   letter-spacing: $p-LS;
+   margin-bottom: $pad-xsmall;
+   &:last-child {
+      margin-bottom: 0px;
+   }
+   &.p-s {
+      font-size: $p-s-FS;
+      line-height: $p-s-LH;
+      letter-spacing: $p-s-LS;
+   }
+   &.p-xs {
+      font-size: $p-xs-FS;
+      line-height: $p-xs-LH;
+      letter-spacing: $p-xs-LS;
+   }
+   &.bold,
+   b,
+   strong {
+      font-weight: 700;
+   }
+   @media #{$mega}{
+      font-size: $p-FS * 1.2;
+      &.p-s {
+         font-size: $p-s-FS * 1.2;
+         line-height: 1.5;
+      }
+   }
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(16);
+      line-height: 1.5;
+      &.p-s {
+         font-size: rem(14);
+         line-height: 1.5;
+      }
+      &.p-xs {
+         font-size: rem(14);
+         line-height: 1.3;
+      }
+   }
+}
+
+
+// ---------------------------------------------
+// Headers
+// ---------------------------------------------
+
+.h1,
+h1 {
+   font-family: $mont;
+   font-size: $h1-FS;
+   font-weight: 900;
+   line-height: $h1-LH;
+   letter-spacing: $h1-LS;
+   &.serif {
+      font-family: $rhetorik;
+      font-weight: 400;
+   }
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(40);
+   }
+}
+
+.h2,
+h2 {
+   font-family: $mont;
+   font-weight: 900;
+   font-size: $h2-FS;
+   line-height: $h2-LH;
+   letter-spacing: $h2-LS;
+   &.serif {
+      font-family: $rhetorik;
+      font-weight: 400;
+   }
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(34);
+   }
+}
+
+.h3,
+h3 {
+   font-family: $rhetorik;
+   font-size: $h3-FS;
+   font-weight: 400;
+   line-height: $h3-LH;
+   letter-spacing: $h3-LS;
+
+   &.sans-serif {
+      font-family: $mont;
+      font-weight: 900;
+   }
+   
+   @media #{$mega}{
+      font-size: $h3-FS * 1.3;
+   }
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(28);
+   }
+}
+
+.h4,
+h4 {
+   font-family: $mont;
+   font-weight: 900;
+   font-size: $h4-FS;
+   line-height: $h4-LH;
+   letter-spacing: $h4-LS;
+
+   &.serif {
+      font-family: $rhetorik;
+      font-weight: 400;
+   }
+
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(24);
+      line-height: 1.25;
+   }
+}
+
+.h5,
+h5 {
+   font-family: $rhetorik;
+   font-weight: 400;
+   font-size: $h5-FS;
+   line-height: $h5-LH;
+   letter-spacing: $h5-LS;
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(18);
+      line-height: 1.25;
+   }
+}
+
+// ---------------------------------------------
+// Label
+// ---------------------------------------------
+
+.h6,
+h6,
+.global-label {
+   font-family: $poppins;
+   font-weight: 700;
+   font-size: $h6-FS;
+   line-height: $h6-LH;
+   letter-spacing: $h6-LS;
+   text-transform: uppercase;
+   &.small {
+      font-size: rem(12);
+   }
+   @media #{$tablet-portrait}, #{$phone} {
+   }
+}
+
+// ---------------------------------------------
+// Buttons / Links
+// ---------------------------------------------
+
+.btn,
+button,
+.text-link {
+   a,
+   span {
+      font-family: $poppins;
+      font-weight: 700;
+      font-size: $btn-FS;
+      line-height: $btn-LH;
+      letter-spacing: $btn-LS;
+   }
+
+   @media #{$tablet-portrait}, #{$phone} {
+      a,
+      span {
+         font-size: rem(14);
+      }
+   }
+}
+
+a.text-link,
+p.text-link,
+span.text-link {
+   font-family: $poppins;
+   font-weight: 700;
+   font-size: $btn-FS;
+   line-height: $btn-LH;
+   letter-spacing: $btn-LS;
+   margin: 0 !important;
+   @media #{$tablet-portrait}, #{$phone} {
+      font-size: rem(14);
+   }
+}

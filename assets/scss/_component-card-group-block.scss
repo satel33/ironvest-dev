@@ -1,0 +1,271 @@
+section.card-group-block {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   width: 100vw;
+   overflow: hidden;
+   .stacked-wrapper {
+      padding: $pad-giant 0 $pad-big;
+      @include pl-pr(0,0,1);
+      @include flex(flex, column, center, center);
+      .headline {
+         @include width(8,7);
+         text-align: center;
+         margin: 0
+      }
+      .text {
+         @include width(6,5);
+         text-align: center;
+         margin: $pad-xsmall 0 $pad-xxsmall;
+      }
+      .info-card-wrapper {
+         width: 100%;
+         margin: $pad-medium 0 0;
+         @include flex(flex, row, stretch, stretch);
+         gap: $gutter;
+         flex-wrap: wrap;
+         // individual cards
+         .info-card {
+            @extend .global-card, .global-card-shadow;
+            @include width(4,3);
+            .card-icon {
+               height: 32px;
+               width: 32px;
+               margin: 0 0 $pad-xxsmall;
+               img {
+                  @extend .obj-contain;
+               }
+            }
+            .card-eyebrow {
+               @extend .global-label;
+               width: 100%;
+               margin: 0 0 $pad-medium;
+            }
+            .card-headline {
+               width: 100%;
+               white-space: pre-wrap;
+            }
+            .card-text {
+               @extend .p-s;
+               width: 100%;
+            }
+         }
+      }
+
+      // ---------------------------------------------
+      // VARIATION
+      // ---------------------------------------------
+      // STRUCTURE
+      .info-card-wrapper {
+         // group
+         &.cards-align-offset {
+            &.cards-count-3 {
+               padding: 0;
+               > :nth-child(2) {
+                  transform: translateY($pad-xxlarge);
+                  transition: transform 1.25s $outCubic;
+               }
+               > :last-child {
+                  transform: translateY(2 * $pad-xxlarge);
+                  transition: transform 1.25s $outCubic;
+               }
+               &[data-scroll="in"] {
+                  > :nth-child(2), > :last-child {
+                     transform: translate(0)
+                  }
+               }
+            }
+         }
+         // card
+         .info-card {
+            // card - centered
+            &.card-align-center {
+               @include flex(flex, column, center, flex-start);
+               padding: $pad-large $pad-xsmall;
+               .card-eyebrow,
+               .card-headline {
+                  text-align: center;
+               }
+               .card-headline {
+                  margin: auto 0 0;
+               }
+            }
+            // card - left-aligned
+            &.card-align-left {
+               @include flex(flex, column, flex-start, flex-start);
+               padding: $pad-medium 36px;
+               .card-headline {
+                  margin: 0 0 $pad-medium;
+               }
+               .card-text {
+                  margin: auto 0 0;
+               }
+            }
+         }
+      }
+   }
+   // COLOR
+   &.bg-light {
+      background: $white-mint;
+   }
+   &.bg-dark {
+      background: $navy-dk;
+      .headline,
+      .text {
+         color: $white-mint;
+      }
+      .info-card-wrapper {
+         .info-card {
+            background: none;
+            border-color: $mint-lt;
+            .card-eyebrow,
+            .card-headline,
+            .card-text {
+               color: $white-mint;
+            }
+         }
+         // color contrast
+         &.cards-style-contrast {
+            .info-card {
+               .card-eyebrow,
+               .card-headline,
+               .card-text {
+                  color: $navy-dk;
+               }
+               background: $white-mint;
+            }
+         }
+      }
+   }
+   // PAGE
+   [data-page="about-us"] &{ // about page
+      border-radius: $block-rad $block-rad 0 0;
+   }
+   // Animation
+   &.stacked {
+      overflow: visible;
+      background: $navy-dk;
+      position: sticky;
+      top: -1px;
+      left: 0;
+      z-index: -10;
+      .stacked-wrapper {
+         position: relative;
+         z-index: 0;
+         padding-bottom: 0;
+         transition: all 1s $outCubic;
+      }
+      &::after {
+         position: absolute;
+         top: 100%;
+         left: 0;
+         content: '';
+         width: 100%;
+         height: 100%;
+         background: $navy-dk;
+         z-index: -10;
+      }
+   }
+   &.stacked-bottom {
+      background: none;
+      position: relative;
+      z-index: -10;
+      .stacked-wrapper {
+         position: relative;
+         z-index: 1;
+         background: linear-gradient(0deg, rgba(7,32,45,1) 75%, rgba(7,32,45,0) 100%);
+      }
+   }
+   &.stacked[style*="--intersect-y: -1"] {
+      .stacked-wrapper {
+         transform: translateY(5%);
+         scale: 0.95;
+         opacity: 0;
+      }
+   }
+
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   @media #{$mobile} {
+      .stacked-wrapper {
+         padding-top: $pad-xxlarge;
+         padding-bottom: $pad-xlarge;
+         .headline,
+         .text {
+            @include width(8,7);
+         }
+         .text {
+            margin: $pad-xsmall 0 0;
+         }
+         .info-card-wrapper {
+            margin: $pad-small 0 0;
+            gap: $pad-xsmall;
+            &.cards-align-offset {
+               &.cards-count-3 {
+                  padding: 0;
+                  > :nth-child(2) {
+                     transform: translateY(0)
+                  }
+                  > :last-child {
+                     transform: translateY(0)
+                  }
+               }
+            }
+            .info-card {
+               @include width(8,7);
+               .card-icon {
+                  margin: 0 0 $pad-xsmall;
+               }
+               .card-eyebrow {
+                  margin: 0 0 $pad-small;
+               }
+               &.card-align-center {
+                  padding: $pad-medium $pad-small;
+               }
+               &.card-align-left {
+                  padding: $pad-medium $pad-small;
+                  .card-headline {
+                     margin: 0 0 $pad-small;
+                  }
+               }
+            }
+         }
+      }
+      [data-page="about-us"] &{ // about page
+         border-radius: $mobile-block-rad $mobile-block-rad 0 0;
+      }
+      // Animation
+      &.stacked {
+         position: static;
+         z-index: 0;
+         .stacked-wrapper {
+            position: static;
+            z-index: 0;
+            padding-bottom: unset;
+         }
+         &::after {
+            height: 0;
+            width: 0;
+         }
+      }
+
+      &.stacked-bottom {
+         background: $navy-dk;
+         position: static;
+         z-index: 0;
+         .stacked-wrapper {
+            position: static;
+            z-index: 0;
+         }
+      }
+
+      &.stacked[style*="--intersect-y: -1"] {
+         .stacked-wrapper {
+            transform: none;
+            scale: 1;
+            opacity: 1;
+         }
+      }
+   }
+}

@@ -1,0 +1,43 @@
+div.filter-partial {
+   // ---------------------------------------------
+   // Desktop
+   // ---------------------------------------------
+   &.toggle {
+      @include flex(flex, row, center, center);
+      .filter-wrapper {
+         @include flex(flex, row, center, center);
+         background: $white;
+         border: solid 1px $navy-dk;
+         border-radius: 48px;
+         padding: $pad-tiny;
+         gap: $pad-tiny;
+         .filter {
+            padding: 4px $pad-xxsmall;
+            border-radius: 48px;
+            transition: all 0.25s $outCubic;
+            cursor: pointer;
+            .filter-label {
+               transition: all 0.25s $outCubic;
+            }
+            &:hover {
+               @extend .global-toggle-shadow;
+               background: $white-mint;
+            }
+            &.filter-active {
+               @extend .global-toggle-shadow;
+               background: $navy-dk;
+               pointer-events: none;
+               .filter-label {
+                  color: $white;
+               }
+            }
+         }
+      }
+   }
+   // ---------------------------------------------
+   // Mobile
+   // ---------------------------------------------
+   &.dropdown {
+      margin: 0 0 $pad-xsmall;
+   }
+}

@@ -1,0 +1,18 @@
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+@font-face {
+   font-family: 'Mont';
+   src: url('~/assets/fonts/Mont-Heavy.woff2') format('woff2'),
+      url('~/assets/fonts/Mont-Heavy.woff') format('woff');
+   font-weight: 900;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'Rhetorik';
+   src: url('~/assets/fonts/RhetorikSerif-Regular.woff2') format('woff2');
+   font-weight: 400;
+   font-style: normal;
+   font-display: swap;
+}
