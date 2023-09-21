@@ -4,7 +4,7 @@
          {{ block.internalTitle }}
       </h1>
 
-      <SearchBar />
+      <!-- <SearchBar /> -->
       <div class="blog-tags">
          <p class="blog-tags__label">Sort by</p>
          <ul class="blog-tags__list">

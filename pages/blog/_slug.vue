@@ -1,6 +1,6 @@
 <template>
    <section v-if="page" class="blog-post">
-      <SearchBar :isBack="true" />
+      <!-- <SearchBar :isBack="true" /> -->
 
       <article class="article-detail">
          <h1 class="title">{{ page.title }}</h1>
