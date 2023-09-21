@@ -1,7 +1,6 @@
 import compress from 'graphql-query-compress'
 import { gql } from 'nuxt-graphql-request'
 import mediaFrag from './mediaFrag'
-import ctaFrag from './ctaFrag'
 import mediaChunk from './mediaChunk'
 import ctaChunk from './ctaChunk'
 
@@ -27,9 +26,10 @@ export default compress(gql`
                }
             }
             promotionalSection {
-               ... on CtaBar {
-                  headline
-                  subtext
+               ... on PromotionalBlock {
+                  header
+                  subHeader
+                  visual
                   ${ctaChunk}
                }
             }
@@ -40,6 +40,12 @@ export default compress(gql`
                   ... on Asset {
                      ...mediaFrag
                   }
+               }
+            }
+            sock: footerCtaBar {
+               ... on CtaBar {
+                  headline
+                  ${ctaChunk}
                }
             }
          }

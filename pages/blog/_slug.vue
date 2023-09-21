@@ -30,7 +30,7 @@
                      class="social-icon"
                      network="facebook"
                      :title="page.title"
-                     url="https://news.vuejs.org/issues/180"
+                     :url="shareUrl"
                   >
                      <facebookIcon />
                   </ShareNetwork>
@@ -38,7 +38,7 @@
                      class="social-icon"
                      network="email"
                      :title="page.title"
-                     url="https://news.vuejs.org/issues/180"
+                     :url="shareUrl"
                   >
                      <mailIcon />
                   </ShareNetwork>
@@ -47,7 +47,7 @@
                      class="social-icon"
                      network="linkedin"
                      :title="page.title"
-                     url="https://news.vuejs.org/issues/180"
+                     :url="shareUrl"
                   >
                      <linkedinIcon />
                   </ShareNetwork>
@@ -56,7 +56,7 @@
                      class="social-icon"
                      network="twitter"
                      :title="page.title"
-                     url="https://news.vuejs.org/issues/180"
+                     :url="shareUrl"
                   >
                      <twitterIcon />
                   </ShareNetwork>
@@ -66,7 +66,10 @@
 
          <RichtextPartial :content="page.content.json" class="text" />
       </article>
-      <cta-bar :block="page.promotionalSection" classes="article-cta" />
+      <PromotionalBlock
+         :block="page.promotionalSection"
+         classes="article-cta"
+      />
    </section>
 </template>
 
@@ -76,6 +79,7 @@ import SearchBar from '~/components/partials/search-bar.vue'
 import MediaPartial from '~/components/partials/media-partial.vue'
 import RichtextPartial from '~/components/partials/richtext-partial.vue'
 import CtaBar from '~/components/partials/cta-bar.vue'
+import PromotionalBlock from '~/components/partials/promotional.vue'
 
 import facebookIcon from '~/assets/images/share-facebook.svg?inline'
 import mailIcon from '~/assets/images/share-mail.svg?inline'
@@ -87,6 +91,7 @@ export default {
    components: {
       SearchBar,
       CtaBar,
+      PromotionalBlock,
       MediaPartial,
       RichtextPartial,
       facebookIcon,
@@ -131,9 +136,13 @@ export default {
    data() {
       return {
          preview: null,
+         shareUrl: '',
       }
    },
    mounted() {
+      this.$root.$emit('sock', this.page.sock ?? null)
+
+      this.shareUrl = window.location.href
       if (this.$route?.query.preview) {
          this.$fetch()
       }
@@ -152,7 +161,6 @@ export default {
                slug: this.$route.params.slug ?? '/',
                preview: true,
             })
-            console.log(this.preview)
          }
       } catch (error) {
          this.$nuxt.error

@@ -101,7 +101,7 @@ export default {
          if (this.postShow >= postsLength) {
             return
          } else {
-            this.postShow = this.postShow + 2
+            this.postShow = this.postShow + 4
          }
       },
    },
