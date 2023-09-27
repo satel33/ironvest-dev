@@ -1,10 +1,9 @@
 <template>
-   <div class="rich-text-wrapper" v-html="richTextToHtml(content)" />
+   <div class="rich-text-wrapper" v-html="richTextToHtmlTest"></div>
 </template>
 
 <script>
-import find  from 'lodash.find'
-// import assetQl from '../../graphql/assetQl'
+import find from 'lodash.find'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
@@ -12,17 +11,25 @@ import cta from './cta.vue'
 export default {
    name: 'RichtextPartial',
    components: { cta },
-   props: ['content', 'links'],
-   methods: {
-      richTextToHtml(content) {
-         return documentToHtmlString(content, {
+   props: ['content', 'links', 'assetData'],
+   computed: {
+      richTextToHtmlTest() {
+         return documentToHtmlString(this.content, {
             renderNode: {
                [INLINES.HYPERLINK]: node => {
                   return `<a href="${node.data.uri}" target="_blank" rel="relreferrer">${node.content[0].value}</a>`
                },
-               // [BLOCKS.EMBEDDED_ASSET]: node => {
-               //    return `<figure><img  ref="${node.data.target.sys.id}" /></figure>`
-               // },
+
+               [BLOCKS.EMBEDDED_ASSET]: node => {
+                  const assetId = node.data.target.sys.id
+                  try {
+                     const assetUrl = this.assetData[assetId]
+                     return `<img src="${assetUrl}" alt="Asset" style="width: 100%"/>`
+                  } catch (error) {
+                     console.error('Error fetching asset:', error)
+                     return ''
+                  }
+               },
 
                [INLINES.ENTRY_HYPERLINK]: node => {
                   const slug = this.getSlug(node.data.target.sys.id)
@@ -31,18 +38,13 @@ export default {
             },
          })
       },
-      getSlug(entryId) {
 
+      getSlug(entryId) {
          const match = find(this.links?.entries.hyperlink, {
             sys: { id: entryId },
          })
          return match?.slug
       },
-     
-      // async getAsset(assetId) {
-      //    const image = await this.$graphql.default.request(assetQl, {id:assetId})
-      //    return image?.asset
-      // },
    },
 }
 </script>

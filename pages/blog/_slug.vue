@@ -1,7 +1,11 @@
 <template>
    <section v-if="page" class="blog-post">
       <!-- <SearchBar :isBack="true" /> -->
-
+      <div class="search-container">
+         <a href="/blogs" class="back-link">
+            <prevArrowIcon /> Back to all blogs
+         </a>
+      </div>
       <article class="article-detail">
          <h1 class="title">{{ page.title }}</h1>
          <p class="author">{{ page.author }}</p>
@@ -64,7 +68,11 @@
             </div>
          </div>
 
-         <RichtextPartial :content="page.content.json" class="text" />
+         <RichtextPartial
+            :content="page.content.json"
+            class="text"
+            :assetData="pageAssetData"
+         />
       </article>
       <PromotionalBlock
          :block="page.promotionalSection"
@@ -85,6 +93,10 @@ import facebookIcon from '~/assets/images/share-facebook.svg?inline'
 import mailIcon from '~/assets/images/share-mail.svg?inline'
 import linkedinIcon from '~/assets/images/share-linkedin.svg?inline'
 import twitterIcon from '~/assets/images/share-twitter.svg?inline'
+import prevArrowIcon from '~/assets/images/prev-arrow.svg?inline'
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
+import assetQl from '../../graphql/assetQl'
 
 export default {
    name: 'BlogPage',
@@ -98,6 +110,7 @@ export default {
       mailIcon,
       linkedinIcon,
       twitterIcon,
+      prevArrowIcon,
    },
    head() {
       return {
@@ -137,6 +150,7 @@ export default {
       return {
          preview: null,
          shareUrl: '',
+         assetData: {},
       }
    },
    mounted() {
@@ -153,6 +167,9 @@ export default {
             ? this?.preview?.blogPostCollection?.items[0]
             : this.post
       },
+      pageAssetData() {
+         return this.assetData
+      },
    },
    async fetch() {
       try {
@@ -166,6 +183,19 @@ export default {
          this.$nuxt.error
       }
    },
+   methods: {
+      async getAssetUrl(assetId) {
+         try {
+            const response = await this.$graphql.default.request(assetQl, {
+               id: assetId,
+            })
+            return response?.asset?.url
+         } catch (error) {
+            console.error('Error fetching asset data:', error)
+            return ''
+         }
+      },
+   },
    async asyncData({ $graphql, payload, params }) {
       if (payload) {
          return { post: payload }
@@ -174,8 +204,36 @@ export default {
             slug: params.slug,
             preview: false,
          })
+         let assetData = {}
+         if (post?.blogPostCollection?.items[0]?.content?.json) {
+            const content = post?.blogPostCollection?.items[0]?.content?.json
+
+            const assetIds = []
+            documentToHtmlString(content, {
+               renderNode: {
+                  [BLOCKS.EMBEDDED_ASSET]: node => {
+                     const assetId = node.data.target.sys.id
+                     assetIds.push(assetId)
+                  },
+               },
+            })
+
+            const promises = assetIds.map(async assetId => {
+               const response = await $graphql.default.request(assetQl, {
+                  id: assetId,
+               })
+               return response?.asset?.url
+            })
+            assetData = await Promise.all(promises).then(res => {
+               const data = {}
+               res.map((url, idx) => (data[assetIds[idx]] = url))
+               return data
+            })
+         }
+
          return {
             post: post.blogPostCollection.items[0],
+            assetData,
          }
       }
    },
