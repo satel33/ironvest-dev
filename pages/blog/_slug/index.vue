@@ -71,7 +71,8 @@
          <RichtextPartial
             :content="page.content.json"
             class="text"
-            :assetData="pageAssetData"
+            :assetUrl="pageAssetUrl"
+            :assetWidth="pageAssetWidth"
          />
       </article>
       <PromotionalBlock
@@ -82,6 +83,8 @@
 </template>
 
 <script>
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import { BLOCKS } from '@contentful/rich-text-types'
 import blogPageQl from '~/graphql/blogPage.js'
 import SearchBar from '~/components/partials/search-bar.vue'
 import MediaPartial from '~/components/partials/media-partial.vue'
@@ -94,9 +97,8 @@ import mailIcon from '~/assets/images/share-mail.svg?inline'
 import linkedinIcon from '~/assets/images/share-linkedin.svg?inline'
 import twitterIcon from '~/assets/images/share-twitter.svg?inline'
 import prevArrowIcon from '~/assets/images/prev-arrow.svg?inline'
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types'
-import assetQl from '../../graphql/assetQl'
+
+import assetQl from '../../../graphql/assetQl'
 
 export default {
    name: 'BlogPage',
@@ -150,7 +152,8 @@ export default {
       return {
          preview: null,
          shareUrl: '',
-         assetData: {},
+         assetUrl: {},
+         assetWidth: {},
       }
    },
    mounted() {
@@ -167,8 +170,11 @@ export default {
             ? this?.preview?.blogPostCollection?.items[0]
             : this.post
       },
-      pageAssetData() {
-         return this.assetData
+      pageAssetUrl() {
+         return this.assetUrl
+      },
+      pageAssetWidth() {
+         return this.assetWidth
       },
    },
    async fetch() {
@@ -183,19 +189,6 @@ export default {
          this.$nuxt.error
       }
    },
-   methods: {
-      async getAssetUrl(assetId) {
-         try {
-            const response = await this.$graphql.default.request(assetQl, {
-               id: assetId,
-            })
-            return response?.asset?.url
-         } catch (error) {
-            console.error('Error fetching asset data:', error)
-            return ''
-         }
-      },
-   },
    async asyncData({ $graphql, payload, params }) {
       if (payload) {
          return { post: payload }
@@ -204,7 +197,8 @@ export default {
             slug: params.slug,
             preview: false,
          })
-         let assetData = {}
+         let assetUrl = {}
+         let assetWidth = {}
          if (post?.blogPostCollection?.items[0]?.content?.json) {
             const content = post?.blogPostCollection?.items[0]?.content?.json
 
@@ -222,18 +216,24 @@ export default {
                const response = await $graphql.default.request(assetQl, {
                   id: assetId,
                })
-               return response?.asset?.url
+               return response?.asset
             })
-            assetData = await Promise.all(promises).then(res => {
+            assetUrl = await Promise.all(promises).then(res => {
                const data = {}
-               res.map((url, idx) => (data[assetIds[idx]] = url))
+               res.map((asset, idx) => (data[assetIds[idx]] = asset.url))
+               return data
+            })
+            assetWidth = await Promise.all(promises).then(res => {
+               const data = {}
+               res.map((asset, idx) => (data[assetIds[idx]] = asset.width))
                return data
             })
          }
 
          return {
             post: post.blogPostCollection.items[0],
-            assetData,
+            assetUrl,
+            assetWidth,
          }
       }
    },
