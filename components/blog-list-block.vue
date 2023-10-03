@@ -9,7 +9,8 @@
          <p class="blog-tags__label">Sort by</p>
          <ul class="blog-tags__list">
             <li
-               v-for="(tag, index) in tags.blogTagCollection.items"
+               v-if="tags.blogTagCollection?.items"
+               v-for="(tag, index) in tags.blogTagCollection?.items"
                :key="`tag-${index}`"
                class="tag-name"
                :class="{ active: currentTag === index }"
@@ -37,9 +38,12 @@
                   </p>
                   <p class="article-title">{{ article.title }}</p>
                   <p class="article-brief">{{ article.description }}</p>
-                  <ul class="blog-tags__list">
+                  <ul
+                     class="blog-tags__list"
+                     v-if="article.tagsCollection?.items"
+                  >
                      <li
-                        v-for="(tag, index) in article.tagsCollection.items"
+                        v-for="(tag, index) in article.tagsCollection?.items"
                         :key="`tag-${index}`"
                         class="tag-name"
                      >

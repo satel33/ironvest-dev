@@ -2,7 +2,7 @@
    <section v-if="page" class="blog-post">
       <!-- <SearchBar :isBack="true" /> -->
       <div class="search-container">
-         <a href="/blogs" class="back-link">
+         <a href="/blog" class="back-link">
             <prevArrowIcon /> Back to all blogs
          </a>
       </div>
