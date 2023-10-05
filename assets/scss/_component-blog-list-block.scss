@@ -34,14 +34,14 @@
             height: 273px;
             border-radius: 12px;
             border-bottom: 1px solid #000;
-            object-fit: cover;
+            object-fit: fill;
             @media #{$mobile} {
                border-radius: 6px;
                height: 200px;
             }
          }
          &-inner {
-            padding: 32px 36px;
+            padding: 30px 33px;
             @media #{$mobile} {
                padding: 18px 20px;
             }
@@ -111,7 +111,7 @@
 
 .tag-name {
    cursor: pointer;
-   margin: 0 7px 7px 7px;
+   margin: 0 6px 6px 6px;
    padding: 6.4px 20px 5.6px;
    border-radius: 57.995px;
    border: 1px solid rgba(170, 169, 186, 0.21);
@@ -126,6 +126,9 @@
    &.active {
       border: 1px solid rgba(170, 169, 186, 0.21);
       background: #c4fccf;
+   }
+   &:last-child {
+      margin-right: 0;
    }
 }
 

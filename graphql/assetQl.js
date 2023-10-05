@@ -6,6 +6,7 @@ export default gql`
       asset(id: $id) {
          url
          title
+         width
       }
    }
 `

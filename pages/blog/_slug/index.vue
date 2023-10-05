@@ -22,10 +22,23 @@
                <li
                   v-for="(tag, index) in page.tagsCollection.items"
                   :key="`tag-${index}`"
+                  @click="navigateToBlogWithTag(tag.tagName)"
                   class="tag-name"
                >
                   # {{ tag.tagName }}
                </li>
+               <!-- <nuxt-link
+                  v-for="(tag, index) in page.tagsCollection.items"
+                  :key="`tag-${index}`"
+                  :to="{
+                     name: 'blog',
+                     params: { slug: 'blog' },
+                     query: { tag: tag.tagName },
+                  }"
+                  class="tag-name"
+               >
+                  # {{ tag.tagName }}
+               </nuxt-link> -->
             </ul>
             <div class="social-share">
                <p class="sharing-label">Share this article</p>
@@ -155,6 +168,11 @@ export default {
          assetUrl: {},
          assetWidth: {},
       }
+   },
+   methods: {
+      navigateToBlogWithTag(tag) {
+         this.$router.push({ path: '/blog', query: { tag: tag } })
+      },
    },
    mounted() {
       this.$root.$emit('sock', this.page.sock ?? null)

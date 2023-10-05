@@ -3,7 +3,7 @@ import mediaChunk from './mediaChunk'
 
 export default gql`
    query {
-      blogPostCollection {
+      blogPostCollection(order: date_DESC) {
          items {
             title
             slug
