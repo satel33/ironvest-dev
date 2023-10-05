@@ -9,6 +9,13 @@
          <p class="blog-tags__label">Sort by</p>
          <ul class="blog-tags__list">
             <li
+               class="tag-name"
+               :class="{ active: currentTag === -1 }"
+               @click="setAllTag"
+            >
+               All tags
+            </li>
+            <li
                v-if="tags.blogTagCollection?.items"
                v-for="(tag, index) in tags.blogTagCollection?.items"
                :key="`tag-${index}`"
@@ -86,7 +93,21 @@ export default {
    props: {
       block: Object,
    },
+   mounted() {
+      const currentTagName = this.$route.query?.tag
+      const tagIdx = this.tags.blogTagCollection.items.findIndex(
+         tag => tag.tagName == currentTagName
+      )
+
+      if (tagIdx > -1) {
+         this.handleTagClick(tagIdx)
+      }
+   },
    methods: {
+      setAllTag() {
+         this.currentTag = -1
+         this.filteredPosts = this.posts.blogPostCollection.items
+      },
       handleTagClick(index) {
          this.currentTag = index
 
