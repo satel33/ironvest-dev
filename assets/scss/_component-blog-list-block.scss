@@ -83,6 +83,18 @@
    }
 }
 
+.blog-search-result {
+   color: #003049;
+   font-size: 20px;
+   font-weight: 500;
+   line-height: 26px;
+   height: 52px;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   text-align: left;
+   margin: 0 !important;
+}
+
 .blog-tags {
    margin: 60px 0 30px;
    @include flex(flex, row, baseline, normal);

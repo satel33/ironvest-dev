@@ -2,6 +2,7 @@
    @include flex(flex, row, center, normal);
    padding-bottom: 16px;
    border-bottom: 1px solid #d3d1d1;
+
    .back-link {
       padding: 6px 11px;
       color: $navy;
@@ -53,16 +54,17 @@
       height: 100%;
       z-index: 0;
       font-size: 14px;
+      font-family: $poppins;
+      font-weight: 500;
+      color: $navy;
       // transition-duration: 0.4s;
       // -moz-transition-duration: 0.4s;
       // -webkit-transition-duration: 0.4s;
       // -o-transition-duration: 0.4s;
-      &:focus {
+      &--expanded {
          width: 290px; /* Bar width+1px */
          padding: 0 50px 0 22px;
-      }
 
-      &:focus {
          & + .searchbutton {
             transition-duration: 0.4s;
             -moz-transition-duration: 0.4s;
@@ -70,6 +72,14 @@
             -o-transition-duration: 0.4s;
             color: $navy;
          }
+      }
+   }
+
+   @media #{$mobile} {
+      @include flex(flex, column, center, normal);
+      .search-left {
+         order: 2;
+         margin-top: 24px;
       }
    }
 }

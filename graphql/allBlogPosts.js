@@ -10,6 +10,9 @@ export default gql`
             ${mediaChunk}
             date
             description
+            content {
+               json
+            }
             tagsCollection {
                items {
                   tagName

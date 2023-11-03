@@ -4,7 +4,11 @@
          {{ block.internalTitle }}
       </h1>
 
-      <!-- <SearchBar /> -->
+      <SearchBar @search="handleSearch">
+         <template v-if="searchQuery" #left>
+            <p class="blog-tags__label">Found {{ articles.length }} results for "{{ searchQuery }}"</p>
+         </template>
+      </SearchBar>
       <div class="blog-tags">
          <p class="blog-tags__label">Sort by</p>
          <ul class="blog-tags__list">
@@ -28,9 +32,9 @@
          </ul>
       </div>
 
-      <div class="blog-list" v-if="filteredPosts">
+      <div class="blog-list" v-if="articles && articles.length">
          <a
-            v-for="(article, index) in filteredPosts.slice(0, postShow)"
+            v-for="(article, index) in articles.slice(0, postShow)"
             :key="`post-${index}`"
             :href="`/blog/${article.slug}`"
          >
@@ -63,7 +67,7 @@
       </div>
 
       <button
-         v-if="postShow < filteredPosts.length"
+         v-if="postShow < articles.length"
          class="btn style-primary btn-loadmore"
          @click="loadMorePosts"
       >
@@ -77,6 +81,7 @@ import MediaPartial from './partials/media-partial.vue'
 import SearchBar from './partials/search-bar.vue'
 import allBlogPosts from '~/graphql/allBlogPosts.js'
 import allBlogTags from '~/graphql/allBlogTags.js'
+import flatten from 'lodash/flatten'
 
 export default {
    name: 'blogListBlock',
@@ -88,6 +93,7 @@ export default {
          tags: {},
          currentTag: -1,
          postShow: 6,
+         searchQuery: ''
       }
    },
    props: {
@@ -103,23 +109,55 @@ export default {
          this.handleTagClick(tagIdx)
       }
    },
+   computed: {
+      articles() {
+         let _articles = [...this.posts.blogPostCollection.items]
+
+         if (this.currentTag !== -1) {
+            const currentTagName =
+               this.tags.blogTagCollection.items[this.currentTag].tagName
+
+               _articles = _articles.filter(item =>
+               item.tagsCollection.items.find(
+                  tagItem => tagItem.tagName === currentTagName
+               )
+            )
+         }
+
+         if (this.searchQuery) {
+            _articles = _articles.filter(({ description, title, tagsCollection: { items: tagItems }, content: { json: { content }} }) => {
+               const articleContent = flatten(content.map(({ content: _content }) => {
+                  return _content.map(({ value }) => value)
+               }))?.filter(str => typeof str === 'string').join(" ")
+
+               const articleTags = tagItems.map(({ tagName }) => tagName.toLowerCase())
+
+
+
+               return (
+                  // Search in titles
+                  title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                  // Search in descriptions
+                  description.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                  // Search in article body
+                  articleContent.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                  // Search in article tags
+                  articleTags.some(tag => tag.includes(this.searchQuery.toLowerCase()))
+               )
+            })
+         }
+
+         return _articles
+      }
+   },
    methods: {
       setAllTag() {
          this.currentTag = -1
-         this.filteredPosts = this.posts.blogPostCollection.items
       },
       handleTagClick(index) {
+         // Reset searchQuery
+         if (this.searchQuery) this.searchQuery = ''
          this.currentTag = index
-
-         const allPosts = this.posts.blogPostCollection.items
-         const currentTagName =
-            this.tags.blogTagCollection.items[this.currentTag].tagName
-
-         this.filteredPosts = allPosts.filter(item =>
-            item.tagsCollection.items.find(
-               tagItem => tagItem.tagName === currentTagName
-            )
-         )
       },
       loadMorePosts() {
          const postsLength = this.posts.blogPostCollection.items.length
@@ -129,11 +167,14 @@ export default {
             this.postShow = this.postShow + 4
          }
       },
+      handleSearch(query) {
+         // Reset tag filtering
+         if (this.currentTag !== -1) this.currentTag = -1
+         this.searchQuery = query;
+      },
    },
    async fetch() {
       this.posts = await this.$graphql.default.request(allBlogPosts)
-      this.filteredPosts = this.posts.blogPostCollection.items
-
       this.tags = await this.$graphql.default.request(allBlogTags)
    },
    fetchOnServer: true,
